@@ -5,7 +5,7 @@ import Search from "./searchtab";
 
 export default function Sidebar() {
   return (
-    <div className="w-48 h-screen bg-amber-50 ">
+    <div className="w-48 h-screen bg-amber-100 ">
       <div className="mt-5.5 ml-4">
         <Image src="./logo.svg" alt="logo" width={124} height={40} />
       </div>
