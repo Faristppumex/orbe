@@ -122,7 +122,7 @@ export default function CompanyTable() {
   return (
     <main className="p-6">
       <div className="overflow-auto rounded-lg shadow border border-gray-200">
-        <table className="min-w-full table-auto text-xs">
+        <table className="min-w-full table-auto " style={{ fontSize: "10px" }}>
           <thead className="bg-gray-100 text-gray-700">
             <tr>
               {headings.map((head) => (
@@ -135,7 +135,7 @@ export default function CompanyTable() {
               ))}
             </tr>
           </thead>
-          <tbody className="text-gray-800">
+          <tbody className="text-gray-800 ">
             {rows.map((row, i) => (
               <tr key={i} className="hover:bg-gray-50">
                 {headings.map((head) => (

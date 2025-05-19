@@ -5,7 +5,7 @@ import { PieChart, Pie, Cell, Tooltip, Label } from "recharts";
 const CustomCenterLabel = () => (
   <text x="50%" y="50%" textAnchor="middle" dominantBaseline="middle">
     <tspan x="50%" dy="-0.6em" fontSize="12" fill="#111">
-      Total Exit Value
+      Total Exit
     </tspan>
     <tspan x="50%" dy="1.6em" fontSize="16" fill="#333" fontWeight="bold">
       $4.5B
@@ -21,7 +21,7 @@ const data = [
   { name: "Media & Entertainment", value: 1850000000 },
 ];
 
-const COLORS = ["#a3a3a3", "#d4d4d4", "#e5e5e5", "#737373", "#525252"];
+const COLORS = ["#1E4841", "#BBF49C", "#ECF4E9", "#BCBEBD", "#E5E6E6"];
 
 const totalValue = data.reduce((sum, item) => sum + item.value, 0);
 
@@ -42,7 +42,13 @@ export default function DonutChart() {
           {data.map((entry, index) => (
             <Cell key={index} fill={COLORS[index % COLORS.length]} />
           ))}
+
+          <Label content={<CustomCenterLabel />} position="center" />
+          {data.map((entry, index) => (
+            <Cell key={index} fill={COLORS[index % COLORS.length]} />
+          ))}
         </Pie>
+
         <Tooltip
           formatter={(value: number) => `$${(value / 1e9).toFixed(2)}B`}
         />
@@ -57,7 +63,7 @@ export default function DonutChart() {
               <span className="">
                 <div className="flex ">
                   <div
-                    className=" rounded mr-2 pl-1"
+                    className="rounded w-8 pl-1 pr-2 mr-3 text-black"
                     style={{ backgroundColor: COLORS[index % COLORS.length] }}
                   >
                     {percentage}%

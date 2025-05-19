@@ -1,3 +1,4 @@
+"use client";
 import DonutChart from "./piechart";
 
 export default function Portfolio() {
