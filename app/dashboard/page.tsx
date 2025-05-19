@@ -2,12 +2,14 @@ import Circle from "../Components/circle";
 import LatestNews from "./components/latestnews";
 import Portfolio from "./components/portfolio";
 import Heading from "./components/heading";
+import Table from "./components/table";
+
 export default function Dashboard() {
   return (
     <div className="bg-amber-100 w-screen">
-      <div className="flex flex-col bg-amber-50 mt-8 mr-7 h-screen pt-6 px-6 rounded-3xl">
+      <div className="flex flex-col bg-amber-50 mt-8 mr-7 pt-6 px-6 rounded-3xl">
         <Heading />
-        <div className="flex   bg-amber-50 rounded-3xl space-x-5">
+        <div className="flex   bg-amber-50 rounded-3xl  space-x-5">
           <div className="flex bg-white h-11/12 w-2/4 ml-7 my-5 rounded-xl p-3 text-purple-300 ">
             <LatestNews />
           </div>
@@ -15,8 +17,8 @@ export default function Dashboard() {
             <Portfolio />
           </div>
         </div>
-        <div className="bg-blue-600 flex-1 mb-3 rounded mx-6 content-center text-center">
-          Table
+        <div className="bg-white h-fit flex-1 mb-3 rounded mx-6 content-center w-full text-center">
+          <Table />
         </div>
       </div>
     </div>

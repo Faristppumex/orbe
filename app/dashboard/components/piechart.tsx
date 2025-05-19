@@ -57,7 +57,7 @@ export default function DonutChart() {
               <span className="">
                 <div className="flex ">
                   <div
-                    className=" rounded mr-2"
+                    className=" rounded mr-2 pl-1"
                     style={{ backgroundColor: COLORS[index % COLORS.length] }}
                   >
                     {percentage}%

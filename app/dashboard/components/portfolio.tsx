@@ -6,7 +6,9 @@ export default function Portfolio() {
   return (
     <div className="bg-white flex flex-col rounded-xl">
       <div className="flex w-auto justify-between bg-white m-2 rounded-2xl ">
-        <div className="font-bold text-black w-fit ">Portfolio Trends</div>
+        <div className="font-bold text-black w-fit ml-2 mt-2">
+          Portfolio Trends
+        </div>
         <div className="text-gray-600">This Year ▾</div>
       </div>
       <div className="w-full text-center bg-white text-gray-600 mr-4 font-stretch-150% font-semibold text-sm  ">
