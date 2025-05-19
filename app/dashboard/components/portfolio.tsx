@@ -1,5 +1,5 @@
 "use client";
-import DonutChart from "./piechart";
+import DonutChart from "./donutchart";
 
 export default function Portfolio() {
   const Total = 4.8;
