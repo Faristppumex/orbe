@@ -5,7 +5,7 @@ import { PieChart, Pie, Cell, Tooltip, Label } from "recharts";
 const CustomCenterLabel = () => (
   <text x="50%" y="50%" textAnchor="middle" dominantBaseline="middle">
     <tspan x="50%" dy="-0.6em" fontSize="12" fill="#111">
-      Total Exit
+      Total Exit Value
     </tspan>
     <tspan x="50%" dy="1.6em" fontSize="16" fill="#333" fontWeight="bold">
       $4.5B
@@ -37,6 +37,7 @@ export default function DonutChart() {
           outerRadius={70}
           paddingAngle={2}
           dataKey="value"
+          isAnimationActive={false}
         >
           <Label content={<CustomCenterLabel />} position="center" />
           {data.map((entry, index) => (

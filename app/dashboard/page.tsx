@@ -1,4 +1,3 @@
-
 import LatestNews from "./components/latestnews";
 import Portfolio from "./components/portfolio";
 import Heading from "./components/heading";
@@ -6,7 +5,7 @@ import Table from "./components/table";
 
 export default function Dashboard() {
   return (
-    <div className="w-screen" style={{ backgroundColor: "#ECF4E9" }}>
+    <div className="w-screen py-7" style={{ backgroundColor: "#ECF4E9" }}>
       <div
         className="flex flex-col  mt-8 mr-7 pt-6 px-6 rounded-3xl"
         style={{ backgroundColor: "#FBFBFC" }}
