@@ -35,13 +35,13 @@ export default function News() {
     },
   ];
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 p-2  flex-1">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-3 mt-4 flex-1">
       {data.map((_, i) => (
         <div
           key={i}
-          className="bg-white p-1 rounded-xl hover:shadow-md transition"
+          className="bg-white p-1 rounded-xl hover:shadow-md transition space-x-2"
         >
-          <div className="flex items-center mb-2 mr-1">
+          <div className="flex items-center mb-2 mr-1 space-x-1.5">
             <Image
               src={avatar} // Replace with your image
               alt="avatar"
