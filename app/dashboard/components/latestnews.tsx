@@ -2,24 +2,24 @@ import Circle from "@/app/Components/circle";
 import { title } from "process";
 import Image from "next/image";
 import Table from "./table";
+import News from "./news";
 
 export default function LatestNews() {
   const add = "/credit.svg";
 
   return (
-    <div className="w-full bg-blue-100">
-      <div className="flex h-4 text-base text-black">
-        <div className=" my-2 w-4">
-          <Circle size="w-2 h-2" color="bg-green-600" />
+    <div className="w-full bg-white text-gray-700 font-semibold flex flex-col">
+      <div className="flex space-x-0">
+        <div className="mt-2 ml-2 w-3 ">
+          <Circle size="w-2 h-2" color="bg-green-700" />
         </div>
-        <b>Latest News</b>
+        Latest News
+        <div className="mt-5 font-medium bg-white ml-auto mr-2 ">
+          By Vertical ▾
+        </div>
       </div>
-      <div className="text-black m-2 float-right">
-        <div>By Vertical</div>
-      </div>
-      {/*table*/}
-      <div className="mt-7 h-86 bg-white-300 mb-6">
-        <Table />
+      <div className="grid bg-white flex-1">
+        <News />
       </div>
     </div>
   );
