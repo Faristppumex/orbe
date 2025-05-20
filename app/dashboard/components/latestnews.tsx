@@ -1,12 +1,7 @@
 import Circle from "@/app/Components/circle";
-import { title } from "process";
-import Image from "next/image";
-import Table from "./table";
 import News from "./news";
 
 export default function LatestNews() {
-  const add = "/credit.svg";
-
   return (
     <div className="w-full bg-white text-gray-700 font-semibold flex flex-col ">
       <div className="flex space-x-0" style={{ color: "#292929" }}>

@@ -1,6 +1,8 @@
 "use client";
-import DonutChart from "./donutchart";
-
+import dynamic from "next/dynamic";
+const DonutChartInner = dynamic(() => import("./donutchart"), {
+  ssr: false,
+});
 export default function Portfolio() {
   const Total = 4.8;
 
@@ -19,7 +21,7 @@ export default function Portfolio() {
 
       {/* Pie Chart*/}
       <div>
-        <DonutChart />
+        <DonutChartInner />
       </div>
     </div>
   );

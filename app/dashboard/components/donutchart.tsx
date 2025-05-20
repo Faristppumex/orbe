@@ -2,30 +2,31 @@
 
 import { PieChart, Pie, Cell, Tooltip, Label } from "recharts";
 
-const CustomCenterLabel = () => (
-  <text x="50%" y="50%" textAnchor="middle" dominantBaseline="middle">
-    <tspan x="50%" dy="-0.6em" fontSize="12" fill="#111">
-      Total Exit Value
-    </tspan>
-    <tspan x="50%" dy="1.6em" fontSize="16" fill="#333" fontWeight="bold">
-      $4.5B
-    </tspan>
-  </text>
-);
 
-const data = [
-  { name: "Enterprise", value: 4750000000 },
-  { name: "Financial Services", value: 3750000000 },
-  { name: "Learning & Development", value: 2900000000 },
-  { name: "AI and Tech", value: 2000000000 },
-  { name: "Media & Entertainment", value: 1850000000 },
-];
-
-const COLORS = ["#1E4841", "#BBF49C", "#ECF4E9", "#BCBEBD", "#E5E6E6"];
-
-const totalValue = data.reduce((sum, item) => sum + item.value, 0);
 
 export default function DonutChart() {
+  const CustomCenterLabel = () => (
+    <text x="50%" y="50%" textAnchor="middle" dominantBaseline="middle">
+      <tspan x="50%" dy="-0.6em" fontSize="12" fill="#111">
+        Total Exit Value
+      </tspan>
+      <tspan x="50%" dy="1.6em" fontSize="16" fill="#333" fontWeight="bold">
+        $4.5B
+      </tspan>
+    </text>
+  );
+
+  const data = [
+    { name: "Enterprise", value: 4750000000 },
+    { name: "Financial Services", value: 3750000000 },
+    { name: "Learning & Development", value: 2900000000 },
+    { name: "AI and Tech", value: 2000000000 },
+    { name: "Media & Entertainment", value: 1850000000 },
+  ];
+
+  const COLORS = ["#1E4841", "#BBF49C", "#ECF4E9", "#BCBEBD", "#E5E6E6"];
+
+  const totalValue = data.reduce((sum, item) => sum + item.value, 0);
   return (
     <div className="bg-white p-6 rounded-lg  max-w-lg mx-auto">
       <PieChart width={500} height={150}>
@@ -39,11 +40,6 @@ export default function DonutChart() {
           dataKey="value"
           isAnimationActive={false}
         >
-          <Label content={<CustomCenterLabel />} position="center" />
-          {data.map((entry, index) => (
-            <Cell key={index} fill={COLORS[index % COLORS.length]} />
-          ))}
-
           <Label content={<CustomCenterLabel />} position="center" />
           {data.map((entry, index) => (
             <Cell key={index} fill={COLORS[index % COLORS.length]} />

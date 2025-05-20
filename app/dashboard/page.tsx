@@ -12,7 +12,7 @@ export default function Dashboard() {
       >
         <Heading />
         <div
-          className="flex   bg-amber-50 rounded-3xl  space-x-5"
+          className="flex bg-amber-50 rounded-3xl  space-x-5"
           style={{ backgroundColor: "#FBFBFC" }}
         >
           <div className="flex bg-white h-11/12 w-2/4 ml-7 my-5 rounded-xl p-3 text-purple-300 ">
