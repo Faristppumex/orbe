@@ -20,7 +20,7 @@ export default function TracksModal({ onClose }: Props) {
         <h2 className="text-xl font-semibold font-urbanist mb-4 text-black">
           Choose Track
         </h2>
-        <p className="text-sm text-gray-700 ">
+        <div className="text-sm text-gray-700 ">
           <ul className="space-y-2">
             <li className="flex space-x-3">
               <div
@@ -67,7 +67,7 @@ export default function TracksModal({ onClose }: Props) {
             </li>
             <hr />
           </ul>
-        </p>
+        </div>
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import InternationalBusiness from "./international-business-machine-cooperation";
 import Image from "next/image";
 import CompanyOverview from "./companyOverview";
+import CurrentCapital from "./current-Capitalization";
 export default function App() {
   return (
     <section
@@ -88,16 +89,16 @@ export default function App() {
 
         <div
           className="flex h-90 text-black space-x-4 my-4 mx-6 rounded"
-          style={{ backgroundColor: "#FAFAFA" }}
+          style={{ backgroundColor: "white" }}
         >
           <div className="w-1/2  rounded-xl pt-4 border-1 border-gray-400">
             <CompanyOverview />
           </div>
           <div
-            className="w-1/2 bg-blue-600 rounded-xl pt-4 pl-4 border-amber-900"
-            style={{ backgroundColor: "" }}
+            className="w-1/2  rounded-xl pt-4 border-1 border-gray-400"
+            style={{ backgroundColor: "#FFFFFF" }}
           >
-            Current Capitalization
+            <CurrentCapital />
           </div>
         </div>
 
