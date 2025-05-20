@@ -61,7 +61,7 @@ export default function TracksModal({ onClose }: Props) {
               >
                 PM{" "}
               </div>
-              <a href="./dashboard/private-market">
+              <a href="./dashboard/public-market">
                 <div className="mt-2">Public Markets</div>
               </a>
             </li>

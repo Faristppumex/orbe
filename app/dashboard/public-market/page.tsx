@@ -1,7 +1,8 @@
+import InternationalBusiness from "./international-business-machine-cooperation";
 export default function App() {
   return (
     <section
-      className=" w-full px-5"
+      className=" w-full px-5 pt-5"
       style={{ background: "#ECF4E9", color: "black" }}
     >
       <div
@@ -31,14 +32,15 @@ export default function App() {
           Company Profile , Insights , Files
         </div>
         <div
-          className="h-64 my-4 mx-6 rounded pt-4 pl-4"
+          className="h-64 my-4 mx-6 rounded pt-4 pl-4 border "
           style={{
             backgroundColor: "#FAFAFA",
             fontSize: "20px",
             fontWeight: "bold",
+            borderColor: "#CCCCCC",
           }}
         >
-          International Business Machine Cooperation
+          <InternationalBusiness />
         </div>
 
         <div className=" flex h-13 my-4 mx-6 ">
@@ -94,7 +96,7 @@ export default function App() {
             Latest News
           </div>
         </div>
-        <div className="flex h-178  mx-6 mt-4 mb-4 space-x-5 rounded">
+        <div className="flex h-178   mx-6 mt-4 mb-4 space-x-5 rounded">
           <div className="w-1/2 rounded bg-red-500">Market</div>
           <div className="w-1/2 space-y-3 pb-3 ">
             <div className="bg-amber-300 h-1/2">Product</div>
