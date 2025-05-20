@@ -1,4 +1,6 @@
 import InternationalBusiness from "./international-business-machine-cooperation";
+import Image from "next/image";
+import CompanyOverview from "./companyOverview";
 export default function App() {
   return (
     <section
@@ -45,21 +47,42 @@ export default function App() {
 
         <div className=" flex h-13 my-4 mx-6 ">
           <div
-            className="w-45 mr-3 text-black flex items-center justify-center"
+            className="w-48 mr-3 flex items-center justify-center font-medium"
             style={{
               backgroundColor: "#F7F1FF",
               // opacity: 0.12,
-              color: "black",
+              color: "#6B7271",
+              fontSize: "11px",
             }}
           >
             {" "}
-            Sentiment Score:
+            Sentiment Score:<span style={{ color: "#9747FF" }}>Positive</span>
+            <div className="ml-2">
+              <Image src={"/info.svg"} alt="info" width={16} height={16} />
+            </div>
           </div>
           <div
-            className="w-45 ml-3 flex items-center justify-center"
-            style={{ backgroundColor: "#F6FDF3" }}
+            className="w-45 ml-3 flex items-center justify-center font-medium border-1 rounded"
+            style={{
+              backgroundColor: "#F6FDF3",
+              color: "#6B7271",
+              fontSize: "11px",
+            }}
           >
-            Deal Score
+            Deal Score:{" "}
+            <div
+              className="text-black w-5 h-5 rounded-full  font-bold flex items-center justify-center ml-1.5"
+              style={{ backgroundColor: "#BBF49C" }}
+            >
+              84
+            </div>
+            <Image
+              className="ml-2"
+              src={"/info.svg"}
+              alt="info"
+              width={16}
+              height={16}
+            />
           </div>
         </div>
 
@@ -67,8 +90,8 @@ export default function App() {
           className="flex h-90 text-black space-x-4 my-4 mx-6 rounded"
           style={{ backgroundColor: "#FAFAFA" }}
         >
-          <div className="w-1/2 bg-amber-200 rounded-xl pt-4 pl-4">
-            Company Overview
+          <div className="w-1/2  rounded-xl pt-4 border-1 border-gray-400">
+            <CompanyOverview />
           </div>
           <div
             className="w-1/2 bg-blue-600 rounded-xl pt-4 pl-4 border-amber-900"
