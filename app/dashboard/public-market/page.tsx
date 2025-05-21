@@ -1,3 +1,4 @@
+"use client";
 import InternationalBusiness from "./international-business-machine-cooperation";
 import Image from "next/image";
 import CompanyOverview from "../../Components/public-market/companyOverview";
@@ -6,6 +7,7 @@ import HistoricalPricesGraph from "@/app/Components/public-market/historical-pri
 import KeyCustomers from "@/app/Components/public-market/key-customers";
 import Market from "@/app/Components/public-market/market";
 import LatestNewspublic from "@/app/Components/public-market/latestNews";
+
 export default function App() {
   return (
     <section

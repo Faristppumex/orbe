@@ -53,7 +53,7 @@ const MarketChart = () => {
   };
 
   return (
-    <div className=" p-0">
+    <div className=" w-full">
       <ReactApexChart
         options={chartData.options}
         series={chartData.series}

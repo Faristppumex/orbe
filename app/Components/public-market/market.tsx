@@ -96,8 +96,38 @@ export default function Market() {
       </div>
       <div className="mx-6 mt-4">
         <div className="font-semibold ">Market Growth Estimation</div>
-        <div className="">
+        <div className="-translate-x-4">
           <MarketChart />
+        </div>
+      </div>
+      <div>
+        <div className="font-semibold ml-6">
+          Total Adressabale Market (TAM){" "}
+        </div>
+        <div className="ml-6 mt-6 space-y-5">
+          <div className=" text-xs flex w-full space-x-0">
+            <div className="w-1/5">Total Adressable Market (TAM) </div>
+            <div
+              className="h-10 w-4/5 mr-6 text-white items-center flex pl-2 font-semibold text-xl"
+              style={{ backgroundColor: "#1E4841" }}
+            >
+              $ 1300 B
+            </div>
+          </div>
+          <div className=" text-xs flex w-full space-x-0">
+            <div className="w-2/10">Total Adressable Market (TAM) </div>
+            <div className="h-10 w-3/10 mr-6 bg-blue-600 text-white items-center flex pl-2 font-semibold text-xl">
+              $ 500 B
+            </div>
+            <div className="w-5/10"></div>
+          </div>
+          <div className=" text-xs flex w-full space-x-0">
+            <div className="w-1/5">Total Adressable Market (TAM) </div>
+            <div className="h-10 w-1/5 mr-6 bg-lime-300 text-white items-center flex pl-2 font-semibold text-xl">
+              $ 150 B
+            </div>
+            <div className="w-3/5"></div>
+          </div>
         </div>
       </div>
     </div>
