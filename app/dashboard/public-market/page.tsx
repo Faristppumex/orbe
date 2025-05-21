@@ -2,6 +2,7 @@ import InternationalBusiness from "./international-business-machine-cooperation"
 import Image from "next/image";
 import CompanyOverview from "./companyOverview";
 import CurrentCapital from "./current-Capitalization";
+import HistoricalPricesGraph from "@/app/Components/public-market/historical-prices-graph";
 export default function App() {
   return (
     <section
@@ -102,8 +103,33 @@ export default function App() {
           </div>
         </div>
 
-        <div className="h-110 bg-blue-300 mx-6 rounded-2xl mb-4 pl-4 pt-4">
-          Historical Prices
+        <div className="h-120 mx-6 rounded-2xl pb-0 pl-4 pt-4 border-gray-300 border-1">
+          <div className="flex">
+            <div className="font-semibold text-xl ml-6 mt-4">
+              Historical Prices
+            </div>
+            <div className="mt-5 ml-auto mr-6">
+              <Image
+                src={"/timeline.svg"}
+                alt="timeline"
+                width={214.61}
+                height={12.62}
+              />
+            </div>
+          </div>
+
+          <div className="w-23 bg-blue-50 flex ml-6 mt-1 rounded-md items-center">
+            <div style={{ fontSize: "14px" }} className="ml-3">
+              Bar
+            </div>
+            <div
+              style={{ fontSize: "14px", backgroundColor: "white" }}
+              className="h-4 w-8 flex items-center justify-center rounded-md ml-6"
+            >
+              Line
+            </div>
+          </div>
+          <HistoricalPricesGraph />
         </div>
 
         <div
