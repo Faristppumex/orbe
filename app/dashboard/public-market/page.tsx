@@ -1,8 +1,11 @@
 import InternationalBusiness from "./international-business-machine-cooperation";
 import Image from "next/image";
-import CompanyOverview from "./companyOverview";
+import CompanyOverview from "../../Components/public-market/companyOverview";
 import CurrentCapital from "./current-Capitalization";
 import HistoricalPricesGraph from "@/app/Components/public-market/historical-prices-graph";
+import KeyCustomers from "@/app/Components/public-market/key-customers";
+import Market from "@/app/Components/public-market/market";
+import LatestNewspublic from "@/app/Components/public-market/latestNews";
 export default function App() {
   return (
     <section
@@ -134,20 +137,22 @@ export default function App() {
 
         <div
           className="flex h-90 text-black space-x-4 my-4 mx-6 rounded"
-          style={{ backgroundColor: "#FAFAFA" }}
+          style={{ backgroundColor: "#FFFFFF" }}
         >
-          <div className="w-1/2 bg-amber-200 rounded-xl pt-4 pl-4">
-            Key Customers
+          <div className="w-1/2 border border-gray-300 rounded-xl pt-4">
+            <KeyCustomers />
           </div>
           <div
-            className="w-1/2 bg-blue-600 rounded-xl pt-4 pl-4 border-amber-900"
+            className="w-1/2 rounded-xl border-1 border-gray-300 "
             style={{ backgroundColor: "" }}
           >
-            Latest News
+            <LatestNewspublic />
           </div>
         </div>
         <div className="flex h-178   mx-6 mt-4 mb-4 space-x-5 rounded">
-          <div className="w-1/2 rounded bg-red-500">Market</div>
+          <div className="w-1/2 rounded border border-gray-300">
+            <Market />
+          </div>
           <div className="w-1/2 space-y-3 pb-3 ">
             <div className="bg-amber-300 h-1/2">Product</div>
             <div className="bg-amber-900 h-1/2">Sentimental Analysis</div>
