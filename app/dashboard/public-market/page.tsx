@@ -7,6 +7,9 @@ import HistoricalPricesGraph from "@/app/Components/public-market/historical-pri
 import KeyCustomers from "@/app/Components/public-market/key-customers";
 import Market from "@/app/Components/public-market/market";
 import LatestNewspublic from "@/app/Components/public-market/latestNews";
+import FinancialsTable from "@/app/Components/public-market/financial";
+import ProductInsights from "@/app/Components/public-market/productinsight";
+import Sentiments from "@/app/Components/public-market/sentimentInsights";
 
 export default function App() {
   return (
@@ -156,8 +159,25 @@ export default function App() {
             <Market />
           </div>
           <div className="w-1/2 space-y-3 pb-3 ">
-            <div className="bg-amber-300 h-1/2">Product</div>
-            <div className="bg-amber-900 h-1/2">Sentimental Analysis</div>
+            <div className="border-1 rounded border-gray-300 h-1/2">
+              <ProductInsights />
+            </div>
+            <div className=" h-1/2">
+              <Sentiments />
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-blue-400 rounded h-196.5 m-3">
+          <FinancialsTable />
+        </div>
+
+        <div className="flex h-124 pb-4 mx-3 space-x-4 ">
+          <div className="w-1/2 bg-blue-50 rounded border-1 border-gray-300">
+            Revenuer and Revenu growth{" "}
+          </div>
+          <div className="w-1/2  bg-blue-50 rounded border-1 border-gray-300">
+            Gross Margin
           </div>
         </div>
       </div>

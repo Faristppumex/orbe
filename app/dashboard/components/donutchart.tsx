@@ -1,8 +1,7 @@
 "use client";
 
 import { PieChart, Pie, Cell, Tooltip, Label } from "recharts";
-
-
+import data from "@/app/data/donutchart";
 
 export default function DonutChart() {
   const CustomCenterLabel = () => (
@@ -15,14 +14,6 @@ export default function DonutChart() {
       </tspan>
     </text>
   );
-
-  const data = [
-    { name: "Enterprise", value: 4750000000 },
-    { name: "Financial Services", value: 3750000000 },
-    { name: "Learning & Development", value: 2900000000 },
-    { name: "AI and Tech", value: 2000000000 },
-    { name: "Media & Entertainment", value: 1850000000 },
-  ];
 
   const COLORS = ["#1E4841", "#BBF49C", "#ECF4E9", "#BCBEBD", "#E5E6E6"];
 

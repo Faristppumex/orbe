@@ -1,7 +1,6 @@
 import Image from "next/image";
-import { title } from "process";
 import { Urbanist } from "next/font/google";
-
+import data from "@/app/data/news";
 const urbanist = Urbanist({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"], // customize as needed
@@ -10,38 +9,7 @@ const urbanist = Urbanist({
 
 export default function News() {
   const avatar = "/avatar.svg";
-  const data = [
-    {
-      title: "YC startup raises $120M",
-      content:
-        " GenX Lab Secures Funding to Propel Innovative Solutions Forward",
-    },
-    {
-      title: "YC startup raises $120M",
-      content:
-        " GenX Lab Secures Funding to Propel Innovative Solutions Forward",
-    },
-    {
-      title: "YC startup raises $120M",
-      content:
-        " GenX Lab Secures Funding to Propel Innovative Solutions Forward",
-    },
-    {
-      title: "YC startup raises $120M",
-      content:
-        " GenX Lab Secures Funding to Propel Innovative Solutions Forward",
-    },
-    {
-      title: "YC startup raises $120M",
-      content:
-        " GenX Lab Secures Funding to Propel Innovative Solutions Forward",
-    },
-    {
-      title: "YC startup raises $120M",
-      content:
-        " GenX Lab Secures Funding to Propel Innovative Solutions Forward",
-    },
-  ];
+
   return (
     <div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-3 mt-4 flex-1">
