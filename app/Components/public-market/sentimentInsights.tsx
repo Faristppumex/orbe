@@ -1,4 +1,4 @@
-import Image from "next/image";
+// import Image from "next/image";
 export default function Sentiments() {
   return (
     <div className=" h-full rounded border-1 border-gray-300 grid grid-cols-7 ">

@@ -1,4 +1,4 @@
-import Image from "next/image";
+// import Image from "next/image";
 export default function LatestNewspublic() {
   const points = [
     "IBM (International Business Machines Corporation) is a global technology and consulting company that provides enterprise solutions in cloud computing, artificial intelligence, cybersecurity, and hybrid cloud infrastructure.",
