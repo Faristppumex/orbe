@@ -4,24 +4,24 @@ export default function Sentiments() {
     <div className=" h-full rounded border-1 border-gray-300 grid grid-cols-7 ">
       <div className="col-span-3  pl-6 pt-4">
         <h1 className="font-semibold text-xl">Sentimental Insights</h1>
-        <Image
+        {/* <Image
           src={"/circled.svg"}
           alt="CHart"
           width={200}
           height={196}
           className="mt-7"
-        />
+        /> */}
       </div>
       <div className="col-span-4">
         <div className="font-semibold mt-5 ml-4">Recent Mentions</div>
         <div>
           <div className="ml-5 mt-5">
-            <Image
+            {/* <Image
               src={"/Percentage.svg"}
               alt={"Image"}
               width={28}
               height={28}
-            />
+            /> */}
           </div>
           <div
             className="font-normal ml-5 mr-4 mt-3 space-y-0.5"
@@ -34,12 +34,12 @@ export default function Sentiments() {
         </div>
         <div>
           <div className="ml-5 mt-5">
-            <Image
+            {/* <Image
               src={"/Percentage.svg"}
               alt={"Image"}
               width={28}
               height={28}
-            />
+            /> */}
           </div>
           <div
             className="font-normal ml-5 mr-4 mt-3 space-y-0.5"

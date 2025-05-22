@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 
 const headers = ["LTM", "Dec 24", "Dec 23", "Dec 22", "Dec 21"];
@@ -41,9 +42,9 @@ const FinancialsTable = () => {
   return (
     <div className="p-4 bg-white border border-gray-200 rounded-md font-sans text-[13px] text-gray-800 w-full h-full">
       {/* Header */}
-      <div className=" items-center justify-between mb-3">
-        <h2 className="font-semibold text-[15px]">Financials</h2>
-        <div className="flex gap-2 bg-blue-100 w-fit mt-2 rounded-xl ">
+      <div className="items-center justify-between mb-3">
+        <div className="font-semibold text-[15px]">Financials</div>
+        <div className="flex gap-2 bg-blue-100 w-fit mt-2 rounded-xl">
           <button
             onClick={() => setSelectedTab("Quarterly")}
             className={`px-2 py-0.5 text-xs rounded-full border ${
@@ -99,15 +100,13 @@ const FinancialsTable = () => {
                     key={label as string}
                     className="text-[13px] border-t border-gray-100"
                   >
-                    {/* <th className=" bg-white rounded"></th> */}
                     <td className="bg-white w-fit"></td>
                     <td className="py-1 px-2">{label}</td>
                     {(values as number[]).map((val, i) => (
                       <td key={i} className="text-right px-3 py-1">
-                        {val.toLocaleString()}
+                        {val.toLocaleString("en-US")}
                       </td>
                     ))}
-                    <hr />
                   </tr>
                 ))}
               </React.Fragment>

@@ -8,21 +8,8 @@ export default function CompanyOverview() {
         style={{ fontSize: "20px" }}
       >
         {" "}
-        <Image
-          src={"/hotel.svg"}
-          alt="img"
-          width={20}
-          height={20}
-          className="mr-2"
-        />
+        <Image src="/credit.svg" alt="News" width={36} height={36} />
         Company OverView
-        <Image
-          src={"/DotsThreeVertical.svg"}
-          alt="more"
-          width={16}
-          height={16}
-          className="ml-auto mr-3"
-        />
       </h1>
       <hr style={{ color: "#EDEDED", fontWeight: "bolder" }} />
 

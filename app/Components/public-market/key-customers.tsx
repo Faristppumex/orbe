@@ -7,21 +7,21 @@ export default function KeyCustomers() {
         style={{ fontSize: "20px" }}
       >
         {" "}
-        <Image
+        {/* <Image
           src={"/customer.svg"}
           alt="img"
           width={20}
           height={20}
           className="mr-2"
-        />
+        /> */}
         Key Customers
-        <Image
+        {/* <Image
           src={"/DotsThreeVertical.svg"}
           alt="more"
           width={16}
           height={16}
           className="ml-auto mr-3"
-        />
+        /> */}
       </h1>
       <hr style={{ color: "#EDEDED", fontWeight: "bolder" }} />
 

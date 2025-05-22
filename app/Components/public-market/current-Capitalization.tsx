@@ -24,8 +24,8 @@ export default function CurrentCapital() {
         <Image
           src={"/DotsThreeVertical.svg"}
           alt="more"
-          width={16}
-          height={16}
+          width={36}
+          height={36}
           className="ml-auto mr-3 border-2"
         />
       </h1>

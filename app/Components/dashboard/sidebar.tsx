@@ -7,7 +7,13 @@ export default function Sidebar() {
   return (
     <div className="w-48 h-" style={{ background: "#ECF4E9" }}>
       <div className="mt-5.5 ml-4">
-        <Image src="/logo.svg" alt="logo" width={124} height={40} />
+        <Image
+          priority={true}
+          src="/logo.svg"
+          alt="logo"
+          width={124}
+          height={40}
+        />
       </div>
       <div className="mx-4">
         <SidebarItem icon="/Vector.svg" name="Dashboard" href="../dashboard" />

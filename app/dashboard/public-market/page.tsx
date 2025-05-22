@@ -1,8 +1,8 @@
 "use client";
-import InternationalBusiness from "./international-business-machine-cooperation";
+import InternationalBusiness from "../../Components/public-market/international-business-machine-cooperation";
 import Image from "next/image";
 import CompanyOverview from "../../Components/public-market/companyOverview";
-import CurrentCapital from "./current-Capitalization";
+import CurrentCapital from "../../Components/public-market/current-Capitalization";
 import HistoricalPricesGraph from "@/app/Components/public-market/historical-prices-graph";
 import KeyCustomers from "@/app/Components/public-market/key-customers";
 import Market from "@/app/Components/public-market/market";
@@ -10,7 +10,9 @@ import LatestNewspublic from "@/app/Components/public-market/latestNews";
 import FinancialsTable from "@/app/Components/public-market/financial";
 import ProductInsights from "@/app/Components/public-market/productinsight";
 import Sentiments from "@/app/Components/public-market/sentimentInsights";
-
+import RevenueGrowthChart from "@/app/Components/public-market/revenuegrowth";
+import GrossChart from "@/app/Components/public-market/grossmargin";
+import Bar from "@/app/Components/dashboard/bar";
 export default function App() {
   return (
     <section
@@ -37,11 +39,8 @@ export default function App() {
         className="flex flex-col  w-full    rounded-2xl"
         style={{ backgroundColor: "#FFFFFF" }}
       >
-        <div
-          className="h-9.5 my-4 mx-6 rounded "
-          style={{ backgroundColor: "#ECF4E9" }}
-        >
-          Company Profile , Insights , Files
+        <div className="h-9.5 my-4 mx-6  " style={{ backgroundColor: "white" }}>
+          <Bar />
         </div>
         <div
           className="h-64 my-4 mx-6 rounded pt-4 pl-4 border "
@@ -173,11 +172,11 @@ export default function App() {
         </div>
 
         <div className="flex h-124 pb-4 mx-3 space-x-4 ">
-          <div className="w-1/2 bg-blue-50 rounded border-1 border-gray-300">
-            Revenuer and Revenu growth{" "}
+          <div className="w-1/2  rounded border-1 border-gray-300">
+            <RevenueGrowthChart />
           </div>
-          <div className="w-1/2  bg-blue-50 rounded border-1 border-gray-300">
-            Gross Margin
+          <div className="w-1/2   rounded border-1 border-gray-300">
+            <GrossChart />
           </div>
         </div>
       </div>

@@ -1,5 +1,12 @@
+"use client";
 import Image from "next/image";
-import MarketChart from "./marketchart";
+
+// import MarketChart from "./marketchart";
+import dynamic from "next/dynamic";
+
+const MarketChart = dynamic(() => import("./marketchart"), {
+  ssr: false,
+});
 export default function Market() {
   return (
     <div>

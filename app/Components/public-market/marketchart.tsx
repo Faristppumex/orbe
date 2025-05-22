@@ -7,7 +7,6 @@ const MarketChart = () => {
   const chartData = {
     series: [
       {
-        name: "Growth",
         data: [8, 15, 22, 27, 30], // percentage values
       },
     ],

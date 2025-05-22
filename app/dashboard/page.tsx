@@ -1,7 +1,7 @@
-import LatestNews from "./components/latestnews";
-import Portfolio from "./components/portfolio";
-import Heading from "./components/heading";
-import Table from "./components/table";
+import LatestNews from "../Components/dashboard/latestnews";
+import Portfolio from "../Components/dashboard/portfolio";
+import Heading from "../Components/dashboard/heading";
+import Table from "../Components/dashboard/table";
 
 export default function Dashboard() {
   return (

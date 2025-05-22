@@ -1,11 +1,11 @@
 import Image from "next/image";
-import { Urbanist } from "next/font/google";
+// import { Urbanist } from "next/font/google";
 import data from "@/app/data/news";
-const urbanist = Urbanist({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"], // customize as needed
-  display: "swap",
-});
+// const urbanist = Urbanist({
+//   subsets: ["latin"],
+//   weight: ["400", "500", "600", "700"], // customize as needed
+//   display: "swap",
+// });
 
 export default function News() {
   const avatar = "/avatar.svg";

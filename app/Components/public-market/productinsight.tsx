@@ -40,7 +40,7 @@ function List() {
       {data.map((d, index) => (
         <div key={index} className="flex ">
           <div className="w-9 h-9 bg-amber-50 mr-3">
-            <Image src={"/hotel.svg"} alt="icon" width={32} height={32} />
+            <Image src={"/credit.svg"} alt="icon" width={32} height={32} />
           </div>
           <div className="text-xs">
             <span

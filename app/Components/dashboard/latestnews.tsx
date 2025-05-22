@@ -1,4 +1,4 @@
-import Circle from "@/app/Components/circle";
+import Circle from "@/app/Components/dashboard/circle";
 import News from "./news";
 
 export default function LatestNews() {
