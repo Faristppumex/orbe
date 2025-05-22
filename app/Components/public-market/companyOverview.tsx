@@ -1,5 +1,5 @@
 import Image from "next/image";
-import points from "@/app/data/companyOverviewPoints";
+import points from "@/store/companyOverviewPoints";
 export default function CompanyOverview() {
   return (
     <div>

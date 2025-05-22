@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Sidebar from "./Components/dashboard/sidebar";
 
+import { ReduxProvider } from "@/store/provider";
+
 // in layout.tsx or a top-level file
 import { Urbanist } from "next/font/google";
 
@@ -37,10 +39,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${urbanist.className} `}
       >
-        <div className="flex">
-          <Sidebar />
-          {children}
-        </div>
+        <ReduxProvider>
+          <div className="flex">
+            <Sidebar />
+            {children}
+          </div>
+        </ReduxProvider>
       </body>
     </html>
   );
