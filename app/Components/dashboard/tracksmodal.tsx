@@ -1,5 +1,5 @@
 import React from "react";
-
+import Link from "next/link";
 type Props = {
   onClose: () => void;
 };
@@ -61,9 +61,9 @@ export default function TracksModal({ onClose }: Props) {
               >
                 PM{" "}
               </div>
-              <a href="./dashboard/public-market">
+              <Link href="./dashboard/public-market">
                 <div className="mt-2">Public Markets</div>
-              </a>
+              </Link>
             </li>
             <hr />
           </ul>

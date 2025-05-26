@@ -1,9 +1,3 @@
-import Counter from "./Components/counter";
-export default function Home() {
-  return (
-    <div>
-      HOME Page
-      <Counter />
-    </div>
-  );
+export default function App() {
+  return <div>Hello guys</div>;
 }

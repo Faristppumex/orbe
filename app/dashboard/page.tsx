@@ -3,6 +3,7 @@ import Portfolio from "../Components/dashboard/portfolio";
 import Heading from "../Components/dashboard/heading";
 import Table from "../Components/dashboard/table";
 
+
 export default function Dashboard() {
   return (
     <div className="w-screen py-7" style={{ backgroundColor: "#ECF4E9" }}>

@@ -1,5 +1,5 @@
 "use client";
-import InternationalBusiness from "../../Components/public-market/international-business-machine-cooperation";
+import CompanyProfile from "@/app/Components/public-market/CompanyProfile";
 import Image from "next/image";
 import CompanyOverview from "../../Components/public-market/companyOverview";
 import CurrentCapital from "../../Components/public-market/current-Capitalization";
@@ -51,7 +51,7 @@ export default function App() {
             borderColor: "#CCCCCC",
           }}
         >
-          <InternationalBusiness />
+          <CompanyProfile />
         </div>
 
         <div className=" flex h-13 my-4 mx-6 ">
@@ -111,31 +111,6 @@ export default function App() {
         </div>
 
         <div className="h-120 mx-6 rounded-2xl pb-0 pl-4 pt-4 border-gray-300 border-1">
-          <div className="flex">
-            <div className="font-semibold text-xl ml-6 mt-4">
-              Historical Prices
-            </div>
-            <div className="mt-5 ml-auto mr-6">
-              <Image
-                src={"/timeline.svg"}
-                alt="timeline"
-                width={214.61}
-                height={12.62}
-              />
-            </div>
-          </div>
-
-          <div className="w-23 bg-blue-50 flex ml-6 mt-1 rounded-md items-center">
-            <div style={{ fontSize: "14px" }} className="ml-3">
-              Bar
-            </div>
-            <div
-              style={{ fontSize: "14px", backgroundColor: "white" }}
-              className="h-4 w-8 flex items-center justify-center rounded-md ml-6"
-            >
-              Line
-            </div>
-          </div>
           <HistoricalPricesGraph />
         </div>
 

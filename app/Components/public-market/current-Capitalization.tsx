@@ -12,7 +12,7 @@ export default function CurrentCapital() {
   return (
     <div>
       <h1
-        className="flex font-semibold space-x-2 ml-3"
+        className="flex font-semibold space-x-2 ml-4"
         style={{ fontSize: "20px" }}
       >
         {" "}
@@ -24,8 +24,8 @@ export default function CurrentCapital() {
         <Image
           src={"/DotsThreeVertical.svg"}
           alt="more"
-          width={36}
-          height={36}
+          width={20}
+          height={20}
           className="ml-auto mr-3 border-2"
         />
       </h1>

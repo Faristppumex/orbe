@@ -1,5 +1,58 @@
+"use client";
 import Image from "next/image";
-export default function InternationalBusiness() {
+import { useEffect, useState } from "react";
+export type entry = {
+  symbol: string;
+  price: number;
+  marketCap: number;
+  beta: number;
+  lastDividend: number;
+  range: string;
+  change: number;
+  changePercentage: number;
+  volume: number;
+  averageVolume: number;
+  companyName: string;
+  currency: string;
+  cik: string;
+  isin: string;
+  cusip: string;
+  exchangeFullName: string;
+  exchange: string;
+  industry: string;
+  website: string;
+  description: string;
+  ceo: string;
+  sector: string;
+  country: string;
+  fullTimeEmployees: string;
+  phone: string;
+  address: string;
+  city: string;
+  state: string;
+  zip: string;
+  image: string;
+  ipoDate: string;
+  defaultImage: boolean;
+  isEtf: boolean;
+  isActivelyTrading: boolean;
+  isAdr: boolean;
+  isFund: boolean;
+};
+export default function CompanyProfile() {
+  const [data, setData] = useState<entry | null>(null);
+
+  useEffect(() => {
+    const getStockData = async () => {
+      const res = await fetch("/api/CompanyProfile");
+      const result = await res.json();
+      setData(result);
+    };
+
+    getStockData();
+  }, []);
+  const entry = data;
+
   return (
     <div className="grid grid-cols-11">
       <div className="col-span-5">
@@ -9,19 +62,22 @@ export default function InternationalBusiness() {
             style={{ backgroundColor: "#1E4841" }}
           ></div>
           <div className=" ml-2 " style={{ fontSize: "20", color: "#242E2C" }}>
-            International Business Machine Corporation <br />
+            {data?.symbol} <br />
             <div className="flex space-x-3">
-              <div className="w-7 h-5.5 bg-white text-sm rounded-3xl font-light flex justify-center items-center">
-                IBM
+              <div className="w-fit px-1 h-5.5 bg-white text-sm rounded-3xl font-light flex justify-center items-center">
+                {entry?.symbol}
               </div>
-              <div className="w-9.5 h-5.5 bg-white text-sm rounded-3xl font-light flex justify-center items-center">
-                NYSE
+              <div className="w-fit px-1 h-5.5 bg-white text-sm rounded-3xl font-light flex justify-center items-center">
+                {entry?.exchange}
               </div>
             </div>
             <div style={{ fontSize: "20px" }}>
-              214.9{" "}
-              <span style={{ fontSize: "12px", fontWeight: "normal" }}>
-                USD
+              {entry?.price}
+              <span
+                style={{ fontSize: "12px", fontWeight: "normal" }}
+                className="ml-1.5"
+              >
+                {entry?.currency}
               </span>
             </div>
             <div
@@ -31,7 +87,7 @@ export default function InternationalBusiness() {
                 color: "#F80000",
               }}
             >
-              -4.95(-19.8%)
+              {entry?.change}({entry?.changePercentage}%)
             </div>
           </div>
         </div>
@@ -45,16 +101,15 @@ export default function InternationalBusiness() {
           }}
         >
           <div className="mb-4">
-            International Business Machines Corporation provides integrated
-            solutions and services worldwide. The company operates through four
-            business segments: Software, Consulting, Infrastructure, and
-            Financing.
+            {entry?.description
+              ? entry.description.length > 200
+                ? entry.description.slice(0, 200) + "..."
+                : entry.description
+              : ""}
           </div>
-          <a
-            href="https://www.ibm.com"
-            style={{ color: "#1E4841", fontSize: "12" }}
-          >
-            https://www.ibm.com
+
+          <a href={entry?.website} style={{ color: "#1E4841", fontSize: "12" }}>
+            {entry?.website}
           </a>
         </div>
       </div>
@@ -65,18 +120,28 @@ export default function InternationalBusiness() {
         style={{ color: "#6B7271", fontSize: "11px" }}
       >
         <div>
-          Founded: <span style={{ color: "#9747FF" }}>1911</span>
+          Founded:{" "}
+          <span style={{ color: "#9747FF" }}>{entry?.ipoDate.slice(0, 4)}</span>
         </div>
         <div>
           Headquarters:
-          <span style={{ color: "#9747FF" }}>Armonk, New York, USA</span>
+          <span style={{ color: "#9747FF" }}>
+            {" "}
+            {entry?.city} {entry?.country}
+          </span>
         </div>
         <div>
           Industry:{" "}
-          <span className="bg-white border-1 rounded-xl px-1">
-            IT, Software
-          </span>{" "}
-          <span className="bg-white border-1 rounded-xl px-1 ">AI</span>
+          {entry?.industry
+            ? entry.industry.split(",").map((name, idx) => (
+                <span
+                  key={idx}
+                  className="bg-white border-1 rounded-xl px-1 mr-1"
+                >
+                  {name.trim()}
+                </span>
+              ))
+            : null}
         </div>
         <div>
           Type:
@@ -98,7 +163,7 @@ export default function InternationalBusiness() {
               className="h-5 w-5 rounded-full  mr-2"
               style={{ backgroundColor: "#BBF49C" }}
             ></div>
-            Aravind Krishna (
+            {entry?.ceo} (
             <span className="font-light" style={{ fontStyle: "italic" }}>
               CEO
             </span>
@@ -138,12 +203,13 @@ export default function InternationalBusiness() {
             )
           </div>
         </div>
-        <div
+        <button
           className="w-fit rounded-4xl px-2 mt-5.5 h-10 flex items-center font-medium py-3.5"
           style={{ backgroundColor: "#BBF49C", fontSize: "14px" }}
+          onClick={() => alert("hello dear, there is nothing to Regenerate")}
         >
           Regenerate Insights
-        </div>
+        </button>
       </div>
     </div>
   );

@@ -10,13 +10,13 @@ export default function LatestNewspublic() {
   return (
     <section className="rounded p-4 bg-white shadow">
       <h2 className="flex items-center font-semibold text-lg mb-2">
-        <Image
+        {/* <Image
           src="/news.svg"
           alt="News icon"
           width={20}
           height={20}
           className="mr-2"
-        />
+        /> */}
         Latest News
         <Image
           src="/DotsThreeVertical.svg"

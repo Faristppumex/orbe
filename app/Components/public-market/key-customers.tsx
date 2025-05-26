@@ -8,7 +8,7 @@ export default function KeyCustomers() {
       >
         {" "}
         {/* <Image
-          src={"/customer.svg"}
+          src={"/user-search.svg"}
           alt="img"
           width={20}
           height={20}
@@ -18,8 +18,8 @@ export default function KeyCustomers() {
         {/* <Image
           src={"/DotsThreeVertical.svg"}
           alt="more"
-          width={16}
-          height={16}
+          width={20}
+          height={20}
           className="ml-auto mr-3"
         /> */}
       </h1>

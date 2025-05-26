@@ -1,16 +1,24 @@
+"use client";
 import Image from "next/image";
 import points from "@/store/companyOverviewPoints";
 export default function CompanyOverview() {
   return (
     <div>
-      <h1
+      <div
         className="flex font-semibold space-x-2 ml-3"
         style={{ fontSize: "20px" }}
       >
         {" "}
-        <Image src="/credit.svg" alt="News" width={36} height={36} />
-        Company OverView
-      </h1>
+        <Image src={"/hotel.svg"} alt="Hotel" width={20} height={20} />
+        <h1>Company Overview</h1>
+        <Image
+          src={"/DotsThreeVertical.svg"}
+          alt="more"
+          width={20}
+          height={20}
+          className="ml-auto mr-3 border-2"
+        />
+      </div>
       <hr style={{ color: "#EDEDED", fontWeight: "bolder" }} />
 
       <ul className="space-y-3 text-gray-800 text-sm pl-2 pt-2 pr-1 ">
