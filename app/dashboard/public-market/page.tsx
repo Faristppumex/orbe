@@ -14,6 +14,7 @@ import RevenueGrowthChart from "@/app/Components/public-market/revenuegrowth";
 import GrossChart from "@/app/Components/public-market/grossmargin";
 import Bar from "@/app/Components/dashboard/bar";
 
+
 export default function App() {
   return (
     <section className="w-full px-4 pt-5 bg-[#ECF4E9] text-black">
@@ -34,6 +35,7 @@ export default function App() {
         </div>
 
         {/* Company Profile */}
+        
         <div className="my-4 mx-2 sm:mx-6 rounded border p-4 bg-[#FAFAFA] text-lg font-bold border-gray-300">
           <CompanyProfile />
         </div>
@@ -68,46 +70,49 @@ export default function App() {
 
         {/* Overview + Capitalization */}
         <div className="flex flex-col md:flex-row gap-4 my-4 mx-2 sm:mx-6">
-          <div className="w-full md:w-1/2 p-4 border rounded-xl">
+          <div className="w-full md:w-1/2 p-4 border rounded-xl border-gray-300 shadow">
             <CompanyOverview />
           </div>
-          <div className="w-full md:w-1/2 p-4 border rounded-xl">
+          <div
+            className="w-full md:w-1/2 p-4 border rounded-xl border-gray-300
+          shadow"
+          >
             <CurrentCapital />
           </div>
         </div>
 
         {/* Historical Prices */}
-        <div className="my-4 mx-2 sm:mx-6 p-4 border rounded-2xl border-gray-300">
+        <div className="my-4 mx-2 sm:mx-6 p-4 border shadow rounded-2xl border-gray-300">
           <HistoricalPricesGraph />
         </div>
 
         {/* Key Customers + News */}
         <div className="flex flex-col md:flex-row gap-4 my-4 mx-2 sm:mx-6">
-          <div className="w-full md:w-1/2 p-4 border rounded-xl">
+          <div className="w-full md:w-1/2 p-4 border border-gray-300 shadow rounded-xl">
             <KeyCustomers />
           </div>
-          <div className="w-full md:w-1/2 p-4 border rounded-xl">
+          <div className="w-full md:w-1/2 border shadow border-gray-300 rounded-xl">
             <LatestNewspublic />
           </div>
         </div>
 
         {/* Market + Product Insights + Sentiment */}
         <div className="flex flex-col lg:flex-row gap-4 my-4 mx-2 sm:mx-6">
-          <div className="w-full lg:w-1/2 p-4 border rounded-xl">
+          <div className="w-full lg:w-1/2 p-4 border shadow border-gray-300 rounded-xl">
             <Market />
           </div>
           <div className="w-full lg:w-1/2 flex flex-col gap-4">
-            <div className="p-4 border rounded-xl">
+            <div className="p-4 border border-gray-300 rounded-xl">
               <ProductInsights />
             </div>
-            <div className="p-4 border rounded-xl">
+            <div className="p-4 border lg:h-1/2 border-gray-300 shadow rounded-xl">
               <Sentiments />
             </div>
           </div>
         </div>
 
         {/* Financials */}
-        <div className="m-2 sm:m-3 rounded bg-blue-400 p-4">
+        <div className="m-2 sm:m-3 rounded border border-gray-300 bg-400 p-4">
           <FinancialsTable />
         </div>
 

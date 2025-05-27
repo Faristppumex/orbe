@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { ApexOptions } from "apexcharts";
-import Image from "next/image";
+// import Image from "next/image";
 import { subDays, isAfter } from "date-fns"; // New import
 
 const ReactApexChart = dynamic(() => import("react-apexcharts"), {

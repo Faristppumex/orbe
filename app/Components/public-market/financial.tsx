@@ -12,26 +12,27 @@ const FinancialsTable = () => {
   );
 
   return (
-    <div className="p-4 bg-white border border-gray-200 rounded-md font-sans text-[13px] text-gray-800 w-full h-full">
-      <div className="items-center justify-between mb-3">
+    <div className="p-4 bg-white rounded-xl font-sans text-[13px] text-gray-800 w-full h-full shadow-sm">
+      {/* Header Section */}
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-4">
         <div className="font-semibold text-[15px]">Financials</div>
-        <div className="flex gap-2 bg-blue-100 w-fit mt-2 rounded-xl">
+        <div className="flex bg-gray-100 rounded-full p-1 mt-2 md:mt-0">
           <button
             onClick={() => dispatch(setSelectedTab("Quarterly"))}
-            className={`px-2 py-0.5 text-xs rounded-full border ${
+            className={`px-3 py-1 text-xs rounded-full transition ${
               selectedTab === "Quarterly"
-                ? "bg-white text-gray-800 font-medium"
-                : "border-gray-300 text-gray-500"
+                ? "bg-white shadow text-gray-800 font-semibold"
+                : "text-gray-500"
             }`}
           >
             Quarterly
           </button>
           <button
             onClick={() => dispatch(setSelectedTab("Yearly"))}
-            className={`px-2 py-0.5 text-xs rounded-full border ${
+            className={`px-3 py-1 text-xs rounded-full transition ${
               selectedTab === "Yearly"
-                ? "bg-white text-gray-800 font-medium"
-                : "border-gray-300 text-gray-500"
+                ? "bg-white shadow text-gray-800 font-semibold"
+                : "text-gray-500"
             }`}
           >
             Yearly
@@ -39,15 +40,16 @@ const FinancialsTable = () => {
         </div>
       </div>
 
-      <div className="rounded">
+      {/* Scrollable Table Container */}
+      <div className="overflow-x-auto">
         <table className="min-w-full border-separate border-spacing-y-[2px]">
-          <thead className="bg-emerald-900">
-            <tr className="bg-blue-700">
-              <th className="w-1/5 bg-emerald-900 rounded"></th>
-              {headers.map((h) => (
+          <thead>
+            <tr>
+              <th className="w-[200px] bg-[#1E4841] rounded-tl-xl"></th>
+              {headers.map((h, idx) => (
                 <th
-                  key={h}
-                  className="bg-emerald-900 text-white text-center py-1 font-medium text-[13px]"
+                  key={idx}
+                  className="bg-[#1E4841] text-white text-center py-2 px-4 font-medium text-[13px]"
                 >
                   {h}
                 </th>
@@ -55,25 +57,30 @@ const FinancialsTable = () => {
             </tr>
           </thead>
           <tbody>
-            {Object.entries(data).map(([section, rows]) => (
+            {Object.entries(data).map(([section, rows], idx) => (
               <React.Fragment key={section}>
+                {/* Section Title */}
                 <tr>
                   <td
                     colSpan={headers.length + 1}
-                    className="py-2 px-2 font-medium text-black text-sm pt-4"
+                    className={`py-3 font-semibold text-gray-800 text-[13px] ${
+                      idx !== 0 ? "pt-6 border-t border-gray-200" : ""
+                    }`}
                   >
                     {section}
                   </td>
                 </tr>
+                {/* Data Rows */}
                 {rows.map(([label, values]) => (
-                  <tr
-                    key={label}
-                    className="text-[13px] border-t border-gray-100"
-                  >
-                    <td className="bg-white w-fit"></td>
-                    <td className="py-1 px-2">{label}</td>
+                  <tr key={label} className="border-t border-gray-100">
+                    <td className="py-2 px-4 text-gray-700 whitespace-nowrap">
+                      {label}
+                    </td>
                     {(values as number[]).map((val, i) => (
-                      <td key={i} className="text-right px-3 py-1">
+                      <td
+                        key={i}
+                        className="py-2 px-4 text-right text-gray-800 whitespace-nowrap"
+                      >
                         {val.toLocaleString("en-US")}
                       </td>
                     ))}

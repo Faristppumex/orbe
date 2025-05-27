@@ -1,7 +1,7 @@
 // import Image from "next/image";
 export default function KeyCustomers() {
   return (
-    <div>
+    <div className="">
       <h1
         className="flex font-semibold space-x-2 ml-3"
         style={{ fontSize: "20px" }}

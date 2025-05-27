@@ -8,7 +8,7 @@ export default function LatestNewspublic() {
   const news = useSelector((state: RootState) => state.news.items);
 
   return (
-    <section className="rounded p-4 bg-white shadow">
+    <section className=" p-4 bg-white rounded-xl ">
       <h2 className="flex items-center font-semibold text-lg mb-2">
         {/* <Image
           src="/news.svg"

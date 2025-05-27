@@ -1,7 +1,7 @@
 // import Image from "next/image";
 export default function Sentiments() {
   return (
-    <div className=" h-full rounded border-1 border-gray-300 grid grid-cols-7 ">
+    <div className=" h-full rounded-xl grid grid-cols-7 ">
       <div className="col-span-3  pl-6 pt-4">
         <h1 className="font-semibold text-xl">Sentimental Insights</h1>
         {/* <Image
