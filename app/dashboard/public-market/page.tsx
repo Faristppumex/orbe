@@ -14,7 +14,6 @@ import RevenueGrowthChart from "@/app/Components/public-market/revenuegrowth";
 import GrossChart from "@/app/Components/public-market/grossmargin";
 import Bar from "@/app/Components/dashboard/bar";
 
-
 export default function App() {
   return (
     <section className="w-full px-4 pt-5 bg-[#ECF4E9] text-black">
@@ -35,7 +34,7 @@ export default function App() {
         </div>
 
         {/* Company Profile */}
-        
+
         <div className="my-4 mx-2 sm:mx-6 rounded border p-4 bg-[#FAFAFA] text-lg font-bold border-gray-300">
           <CompanyProfile />
         </div>

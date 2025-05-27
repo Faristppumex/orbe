@@ -1,8 +1,6 @@
 import Image from "next/image";
 import SidebarItem from "./sidebarItems";
-// import Link from "next/link";
 import Search from "./searchtab";
-import Link from "next/link";
 export default function Sidebar() {
   return (
     <div className="w-48 h-" style={{ background: "#ECF4E9" }}>
