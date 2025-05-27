@@ -13,81 +13,52 @@ import Sentiments from "@/app/Components/public-market/sentimentInsights";
 import RevenueGrowthChart from "@/app/Components/public-market/revenuegrowth";
 import GrossChart from "@/app/Components/public-market/grossmargin";
 import Bar from "@/app/Components/dashboard/bar";
+
 export default function App() {
   return (
-    <section
-      className=" w-full px-5 pt-5"
-      style={{ background: "#ECF4E9", color: "black" }}
-    >
-      <div
-        className="flex row-span-0 h-9  mb-4 text-gray-600 font-bold rounded-xl justify-end "
-        style={{ background: "#ECF4E9", fontSize: "22px" }}
-      >
-        <div className="mr-auto">Public Markets</div>
-        <div className="flex justify-end w-44 ">
-          <div className="py-2 pr-3.5" style={{ fontSize: "16px" }}>
-            VB
-          </div>
-          <div
-            className=" w-9.5 h-9.6 rounded-full"
-            style={{ backgroundColor: "#BBF49C" }}
-          ></div>
+    <section className="w-full px-4 pt-5 bg-[#ECF4E9] text-black">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row justify-between items-center mb-4 font-bold text-gray-600 text-xl">
+        <div className="mb-2 sm:mb-0">Public Markets</div>
+        <div className="flex items-center gap-2">
+          <div className="text-sm">VB</div>
+          <div className="w-9 h-9 rounded-full bg-[#BBF49C]" />
         </div>
       </div>
 
-      <div
-        className="flex flex-col  w-full    rounded-2xl"
-        style={{ backgroundColor: "#FFFFFF" }}
-      >
-        <div className="h-9.5 my-4 mx-6  " style={{ backgroundColor: "white" }}>
+      {/* Main Container */}
+      <div className="flex flex-col w-full rounded-2xl bg-white">
+        {/* Top Bar */}
+        <div className="my-4 mx-2 sm:mx-6">
           <Bar />
         </div>
-        <div
-          className="h-64 my-4 mx-6 rounded pt-4 pl-4 border "
-          style={{
-            backgroundColor: "#FAFAFA",
-            fontSize: "20px",
-            fontWeight: "bold",
-            borderColor: "#CCCCCC",
-          }}
-        >
+
+        {/* Company Profile */}
+        <div className="my-4 mx-2 sm:mx-6 rounded border p-4 bg-[#FAFAFA] text-lg font-bold border-gray-300">
           <CompanyProfile />
         </div>
 
-        <div className=" flex h-13 my-4 mx-6 ">
-          <div
-            className="w-48 mr-3 flex items-center justify-center font-medium"
-            style={{
-              backgroundColor: "#F7F1FF",
-              // opacity: 0.12,
-              color: "#6B7271",
-              fontSize: "11px",
-            }}
-          >
-            {" "}
-            Sentiment Score:<span style={{ color: "#9747FF" }}>Positive</span>
-            <div className="ml-2">
-              <Image src={"/info.svg"} alt="info" width={16} height={16} />
-            </div>
+        {/* Sentiment & Deal Score */}
+        <div className="flex flex-col sm:flex-row gap-3 my-4 mx-2 sm:mx-6">
+          <div className="flex items-center justify-center text-xs font-medium bg-[#F7F1FF] text-[#6B7271] px-4 py-2 rounded">
+            Sentiment Score:{" "}
+            <span className="text-[#9747FF] ml-1">Positive</span>
+            <Image
+              className="ml-2"
+              src="/info.svg"
+              alt="info"
+              width={16}
+              height={16}
+            />
           </div>
-          <div
-            className="w-45 ml-3 flex items-center justify-center font-medium border-1 rounded"
-            style={{
-              backgroundColor: "#F6FDF3",
-              color: "#6B7271",
-              fontSize: "11px",
-            }}
-          >
-            Deal Score:{" "}
-            <div
-              className="text-black w-5 h-5 rounded-full  font-bold flex items-center justify-center ml-1.5"
-              style={{ backgroundColor: "#BBF49C" }}
-            >
+          <div className="flex items-center justify-center text-xs font-medium bg-[#F6FDF3] text-[#6B7271] px-4 py-2 rounded border">
+            Deal Score:
+            <div className="w-5 h-5 bg-[#BBF49C] text-black font-bold text-xs rounded-full flex items-center justify-center ml-2">
               84
             </div>
             <Image
               className="ml-2"
-              src={"/info.svg"}
+              src="/info.svg"
               alt="info"
               width={16}
               height={16}
@@ -95,62 +66,57 @@ export default function App() {
           </div>
         </div>
 
-        <div
-          className="flex h-90 text-black space-x-4 my-4 mx-6 rounded"
-          style={{ backgroundColor: "white" }}
-        >
-          <div className="w-1/2  rounded-xl pt-4 border-1 border-gray-400">
+        {/* Overview + Capitalization */}
+        <div className="flex flex-col md:flex-row gap-4 my-4 mx-2 sm:mx-6">
+          <div className="w-full md:w-1/2 p-4 border rounded-xl">
             <CompanyOverview />
           </div>
-          <div
-            className="w-1/2  rounded-xl pt-4 border-1 border-gray-400"
-            style={{ backgroundColor: "#FFFFFF" }}
-          >
+          <div className="w-full md:w-1/2 p-4 border rounded-xl">
             <CurrentCapital />
           </div>
         </div>
 
-        <div className="h-120 mx-6 rounded-2xl pb-0 pl-4 pt-4 border-gray-300 border-1">
+        {/* Historical Prices */}
+        <div className="my-4 mx-2 sm:mx-6 p-4 border rounded-2xl border-gray-300">
           <HistoricalPricesGraph />
         </div>
 
-        <div
-          className="flex h-90 text-black space-x-4 my-4 mx-6 rounded"
-          style={{ backgroundColor: "#FFFFFF" }}
-        >
-          <div className="w-1/2 border border-gray-300 rounded-xl pt-4">
+        {/* Key Customers + News */}
+        <div className="flex flex-col md:flex-row gap-4 my-4 mx-2 sm:mx-6">
+          <div className="w-full md:w-1/2 p-4 border rounded-xl">
             <KeyCustomers />
           </div>
-          <div
-            className="w-1/2 rounded-xl border-1 border-gray-300 "
-            style={{ backgroundColor: "" }}
-          >
+          <div className="w-full md:w-1/2 p-4 border rounded-xl">
             <LatestNewspublic />
           </div>
         </div>
-        <div className="flex h-178   mx-6 mt-4 mb-4 space-x-5 rounded">
-          <div className="w-1/2 rounded border border-gray-300">
+
+        {/* Market + Product Insights + Sentiment */}
+        <div className="flex flex-col lg:flex-row gap-4 my-4 mx-2 sm:mx-6">
+          <div className="w-full lg:w-1/2 p-4 border rounded-xl">
             <Market />
           </div>
-          <div className="w-1/2 space-y-3 pb-3 ">
-            <div className="border-1 rounded border-gray-300 h-1/2">
+          <div className="w-full lg:w-1/2 flex flex-col gap-4">
+            <div className="p-4 border rounded-xl">
               <ProductInsights />
             </div>
-            <div className=" h-1/2">
+            <div className="p-4 border rounded-xl">
               <Sentiments />
             </div>
           </div>
         </div>
 
-        <div className="bg-blue-400 rounded h-196.5 m-3">
+        {/* Financials */}
+        <div className="m-2 sm:m-3 rounded bg-blue-400 p-4">
           <FinancialsTable />
         </div>
 
-        <div className="flex h-124 pb-4 mx-3 space-x-4 ">
-          <div className="w-1/2  rounded border-1 border-gray-300">
+        {/* Revenue + Gross */}
+        <div className="flex flex-col md:flex-row gap-4 my-4 mx-2 sm:mx-3 pb-4">
+          <div className="w-full md:w-1/2 p-4 border rounded-xl">
             <RevenueGrowthChart />
           </div>
-          <div className="w-1/2   rounded border-1 border-gray-300">
+          <div className="w-full md:w-1/2 p-4 border rounded-xl">
             <GrossChart />
           </div>
         </div>
