@@ -1,7 +1,8 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import Loader from "@/app/dashboard/public-market/loader"; // Ensure this component returns a full-screen spinner
+import Loader from "@/app/Components/public-market/loading"; // Ensure this component returns a full-screen spinner
+import CompanyProfileSkeleton from "@/app/ui/public-market/companyProfileSkeleton";
 export type entry = {
   symbol: string;
   price: number;
@@ -47,8 +48,10 @@ export default function CompanyProfile() {
     getStockData();
   }, []);
 
-
   const entry = data;
+  if (loading) {
+    return <CompanyProfileSkeleton />;
+  }
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
