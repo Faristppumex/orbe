@@ -51,15 +51,23 @@ export default function CompanyProfile() {
   if (loading) {
     return <CompanyProfileSkeleton />;
   }
+  console.log(entry?.image);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
       <div className="md:col-span-5 col-span-12">
         <div className="flex items-center">
           <div
-            className="w-20 h-20 rounded-full"
+            className="w-20 h-20 rounded-full flex justify-center items-center"
             style={{ backgroundColor: "#1E4841" }}
-          ></div>
+          >
+            <Image
+              src={"/logo-icon.svg"}
+              alt={"company Logo"}
+              width={80}
+              height={80}
+            />
+          </div>
           <div className="ml-2 text-gray-900" style={{ fontSize: "20px" }}>
             {data?.symbol} <br />
             <div className="flex space-x-3 mt-1">

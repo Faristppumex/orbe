@@ -18,7 +18,7 @@ export default function App() {
   return (
     <section className="w-full px-4 pt-5 bg-[#ECF4E9] text-black">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-center mb-4 font-bold text-gray-600 text-xl">
+      <div className="flex flex-row justify-between items-center mb-4 font-bold text-gray-600 text-xl">
         <div className="mb-2 sm:mb-0">Public Markets</div>
         <div className="flex items-center gap-2">
           <div className="text-sm">VB</div>
