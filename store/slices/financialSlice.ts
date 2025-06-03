@@ -12,7 +12,7 @@ interface FinancialsState {
 
 const initialState: FinancialsState = {
   selectedTab: "Yearly",
-  headers: ["", "LTM", "Dec 24", "Dec 23", "Dec 22", "Dec 21"],
+  headers: ["LTM", "Dec 24", "Dec 23", "Dec 22", "Dec 21"],
   data: {
     "Income Statement": [
       ["Sales", [62753.0, 62753.0, 61860.0, 60530.0, 57350.0]],
