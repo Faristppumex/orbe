@@ -121,6 +121,7 @@ export default function App() {
           <div className="flex flex-col md:flex-row gap-4 my-4 mx-6 sm:mx-6  pb-4">
             <div className="w-full md:w-1/2 p-4 border border-gray-300 shadow rounded-xl">
               <RevenueGrowthChart />
+              something
             </div>
             <div className="w-full md:w-1/2 p-4 border border-gray-300 shadow rounded-xl">
               <GrossChart />

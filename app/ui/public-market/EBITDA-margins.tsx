@@ -24,7 +24,7 @@ const data = [
 
 export default function EBITBAmargin() {
   return (
-    <div className="w-full h-screen p-4">
+    <div className="w-full h-100  p-4">
       <h2 className="text-xl font-semibold mb-4">EBITDA Margins</h2>
       <ResponsiveContainer width="100%" height="100%">
         <ComposedChart data={data}>

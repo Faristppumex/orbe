@@ -24,7 +24,7 @@ const data = [
 
 export default function RevenueGrowthChart() {
   return (
-    <div className="w-full h-fit p-4">
+    <div className="w-full h-100 p-4">
       <h2 className="text-xl font-semibold mb-4">Revenue and Revenue Growth</h2>
       <ResponsiveContainer width="100%" height="100%">
         <ComposedChart data={data}>
@@ -48,7 +48,7 @@ export default function RevenueGrowthChart() {
           <Legend />
           <CartesianGrid strokeDasharray="0" vertical={false} />
 
-          <Bar yAxisId="left" dataKey="revenu" fill="#0F2E2E" barSize={30} />
+          <Bar yAxisId="left" dataKey="revenue" fill="#0F2E2E" barSize={30} />
 
           <Line
             yAxisId="right"
