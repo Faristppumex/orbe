@@ -1,8 +1,7 @@
-import LatestNews from "../Components/dashboard/latestnews";
-import Portfolio from "../Components/dashboard/portfolio";
-import Heading from "../Components/dashboard/heading";
-import Table from "../Components/dashboard/table";
-
+import LatestNews from "../ui/dashboard/latestnews";
+import Portfolio from "../ui/dashboard/portfolio";
+import Heading from "../ui/dashboard/heading";
+import Table from "../ui/dashboard/table";
 
 export default function Dashboard() {
   return (

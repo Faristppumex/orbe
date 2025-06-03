@@ -1,18 +1,18 @@
 "use client";
-import CompanyProfile from "@/app/Components/public-market/CompanyProfile";
+import CompanyProfile from "@/app/ui/public-market/CompanyProfile";
 import Image from "next/image";
-import CompanyOverview from "../../Components/public-market/companyOverview";
-import CurrentCapital from "../../Components/public-market/current-Capitalization";
-import HistoricalPricesGraph from "@/app/Components/public-market/historical-prices-graph";
-import KeyCustomers from "@/app/Components/public-market/key-customers";
-import Market from "@/app/Components/public-market/market";
-import LatestNewspublic from "@/app/Components/public-market/latestNews";
-import FinancialsTable from "@/app/Components/public-market/financial";
-import ProductInsights from "@/app/Components/public-market/productinsight";
-import Sentiments from "@/app/Components/public-market/sentimentInsights";
-import RevenueGrowthChart from "@/app/Components/public-market/revenuegrowth";
-import GrossChart from "@/app/Components/public-market/grossmargin";
-import Bar from "@/app/Components/dashboard/bar";
+import CompanyOverview from "../../ui/public-market/companyOverview";
+import CurrentCapital from "../../ui/public-market/current-Capitalization";
+import HistoricalPricesGraph from "@/app/ui/public-market/historical-prices-graph";
+import KeyCustomers from "@/app/ui/public-market/key-customers";
+import Market from "@/app/ui/public-market/market";
+import LatestNewspublic from "@/app/ui/public-market/latestNews";
+import FinancialsTable from "@/app/ui/public-market/financial";
+import ProductInsights from "@/app/ui/public-market/productinsight";
+import Sentiments from "@/app/ui/public-market/sentimentInsights";
+import RevenueGrowthChart from "@/app/ui/public-market/revenuegrowth";
+import GrossChart from "@/app/ui/public-market/grossmargin";
+import Bar from "@/app/ui/dashboard/bar";
 
 export default function App() {
   return (

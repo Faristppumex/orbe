@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Sidebar from "./Components/dashboard/sidebar";
+import Sidebar from "./ui/dashboard/sidebar";
 
 import { ReduxProvider } from "@/store/provider";
 
