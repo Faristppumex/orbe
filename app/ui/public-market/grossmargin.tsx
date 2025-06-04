@@ -23,7 +23,7 @@ const marginData = [
 
 export default function GrossChart() {
   return (
-    <div className="w-full h-100 p-4">
+    <div className="w-full h-110 p-4 my-4">
       <h2 className="text-xl font-semibold mb-4">Gross Margins</h2>
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={marginData}>
