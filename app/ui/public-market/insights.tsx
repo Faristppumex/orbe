@@ -6,7 +6,7 @@ import {
   XAxis,
   YAxis,
   Tooltip,
-  Legend,
+  //   Legend,
   ResponsiveContainer,
 } from "recharts";
 
@@ -314,19 +314,19 @@ function AnalystTable() {
           <tr className="font-semibold border border-t-gray-300">
             <td className="px-4 py-2">Guidance Low</td>
             <td></td>
-            <td className="px-4 py-2 font-bold">28th Apr '25</td>
+            <td className="px-4 py-2 font-bold">28th Apr 25</td>
             <td></td>
           </tr>
           <tr className="font-semibold border border-t-gray-300">
             <td className="px-4 py-2">Guidance High</td>
             <td></td>
-            <td className="px-4 py-2 font-bold">28th Apr '25</td>
+            <td className="px-4 py-2 font-bold">28th Apr 25</td>
             <td></td>
           </tr>
           <tr className="text-black font-semibold border-t border-t-gray-300">
             <td className="px-4 py-2">Median (12 ests)</td>
             <td></td>
-            <td className="px-4 py-2 font-bold">28th Apr '25</td>
+            <td className="px-4 py-2 font-bold">28th Apr 25</td>
             <td></td>
           </tr>
           {analystData.map((row, index) => (
