@@ -16,6 +16,7 @@ import Bar from "@/app/ui/dashboard/bar";
 import EBITBAmargin from "@/app/ui/public-market/EBITDA-margins";
 import React from "react";
 import { useState } from "react";
+import Insights from "@/app/ui/public-market/insights";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("profile"); // default tab
@@ -32,10 +33,6 @@ export default function App() {
 
         {activeTab === "profile" && (
           <>
-            {/* Everything else currently under CompanyProfile tab */}
-            {/* Sentiment, Overview, Charts, etc. */}
-            {/* Just wrap all of it in this conditional block */}
-
             {/* Company Profile */}
 
             <div className="my-4 mx-2 sm:mx-6 rounded border p-4 bg-[#FAFAFA] text-lg font-bold border-gray-300">
@@ -219,10 +216,11 @@ export default function App() {
           </>
         )}
 
+        {/* Insights */}
+
         {activeTab === "insights" && (
           <div className="p-4 text-gray-700 text-lg">
-            {/* TODO: Replace this with your Insights content */}
-            Insights coming soon...
+            <Insights />
           </div>
         )}
 

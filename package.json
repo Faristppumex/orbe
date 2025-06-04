@@ -17,6 +17,7 @@
     "@reduxjs/toolkit": "^2.8.2",
     "apexcharts": "^4.7.0",
     "date-fns": "^4.1.0",
+    "lucide-react": "^0.513.0",
     "mui": "^0.0.1",
     "next": "15.3.2",
     "react": "^19.0.0",
