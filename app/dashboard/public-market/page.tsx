@@ -17,6 +17,7 @@ import EBITBAmargin from "@/app/ui/public-market/EBITDA-margins";
 import React from "react";
 import { useState } from "react";
 import Insights from "@/app/ui/public-market/insights";
+import Heading from "@/app/ui/dashboard/heading";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("profile"); // default tab
@@ -24,9 +25,10 @@ export default function App() {
   return (
     <section className="w-full px-4 pt-5 pb-5 bg-[#ECF4E9] text-black">
       {/* Header */}
-      ...
+
       {/* Main Container */}
-      <div className="flex flex-col w-full rounded-2xl bg-white">
+      <div className="flex flex-col w-full rounded-2xl pt-3 bg-white">
+        <Heading />
         <div className="my-4 mx-2 sm:mx-6">
           <Bar value={activeTab} onChange={setActiveTab} />
         </div>

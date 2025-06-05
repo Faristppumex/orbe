@@ -23,7 +23,7 @@ export default function Dashboard() {
           </div>
         </div>
         <div className="  h-fit flex-1 mb-3  content-center w-full text-center">
-          <Table />
+          {/* <Table /> */}
         </div>
       </div>
     </div>

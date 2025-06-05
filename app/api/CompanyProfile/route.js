@@ -1,7 +1,5 @@
 export async function GET() {
-  const res = await fetch(
-    " https://financialmodelingprep.com/stable/profile?symbol=AAPL&apikey=8LL2fsCzkr0lE7LHVZdWf7WiQ1owyG8Z"
-  );
+  const res = await fetch(" http://localhost:3000/api/profile");
 
   if (!res.ok) {
     return new Response(JSON.stringify({ error: "Failed to fetch data" }), {

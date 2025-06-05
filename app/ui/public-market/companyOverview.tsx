@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import points from "@/store/companyOverviewPoints";
+import points from "../../store/companyOverviewPoints";
 export default function CompanyOverview() {
   return (
     <div>

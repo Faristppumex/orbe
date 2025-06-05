@@ -1,7 +1,8 @@
 "use client";
 
 import { PieChart, Pie, Cell, Tooltip, Label } from "recharts";
-import data from "@/store/donutchart";
+
+import data from "../../store/donutchart";
 
 export default function DonutChart() {
   const CustomCenterLabel = () => (

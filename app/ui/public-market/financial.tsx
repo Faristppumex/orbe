@@ -2,8 +2,9 @@
 
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../../store";
-import { setSelectedTab } from "../../../store/slices/financialSlice";
+import { RootState } from "../../../store/store";
+// import { setSelectedTab } from "../../store/slices/financialSlice";
+import { setSelectedTab } from "../../store/slices/financialSlice";
 
 const FinancialsTable = () => {
   const dispatch = useDispatch();

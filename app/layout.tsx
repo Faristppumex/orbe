@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Sidebar from "./ui/dashboard/sidebar";
 
-import { ReduxProvider } from "@/store/provider";
+import { ReduxProvider } from "./store/provider";
 
 // in layout.tsx or a top-level file
 import { Urbanist } from "next/font/google";

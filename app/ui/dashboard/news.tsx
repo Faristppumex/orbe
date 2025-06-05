@@ -1,6 +1,6 @@
 import Image from "next/image";
 // import { Urbanist } from "next/font/google";
-import data from "@/store/news";
+import data from "../../store/news";
 // const urbanist = Urbanist({
 //   subsets: ["latin"],
 //   weight: ["400", "500", "600", "700"], // customize as needed

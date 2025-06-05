@@ -90,20 +90,23 @@ export default function Insights() {
       </div>
 
       {/** Broker Price targets */}
+      
       <div className="border border-gray-300 rounded-xl mx-2 shadow px-4 py-2 my-2 font-semibold text-black">
         Broker Price Targets
         <AnalystTable />
       </div>
 
       {/**Comparable Companies Trading Metrics*/}
+
       <div className="border border-gray-300 rounded-xl mx-2 shadow px-4 py-2 my-2 font-semibold text-black">
         Comparable Companies - Trading Metrics
         <MarketDataTable />
       </div>
 
-      {/**MarketData Table*/}
+      {/**Comparable companies -Operating Metrics*/}
+
       <div className="border border-gray-300 rounded-xl mx-2 shadow px-4 py-2 my-2 font-semibold text-black">
-        Comparable Companies - Trading Metrics
+        Comparable Companies - Operating Metrics
         <MarketDataTable />
       </div>
 

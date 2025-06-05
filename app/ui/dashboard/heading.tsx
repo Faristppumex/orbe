@@ -2,8 +2,9 @@ import Popup from "./popup";
 export default function Heading() {
   return (
     <div
-      className="flex text-gray-500 justify-between mt-1.5 bg-amber-50 h-9.5 mx-7 font-bold text-xl py-1.75 items-center font-urbanist"
-      style={{ backgroundColor: "#FBFBFC" }}
+      className="flex text-gray-500 justify-between mt-1.5 h-9.5 mx-7 font-bold text-xl py-1.75 items-center font-urbanist"
+      style={{  opacity:"100%" }}
+      // backgroundColor: "#FBFBFC"
     >
       Dashboard
       <div className="flex space-x-2 ">

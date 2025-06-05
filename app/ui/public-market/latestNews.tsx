@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../store";
+import { RootState } from "../../../store/store";
 
 export default function LatestNewspublic() {
   const news = useSelector((state: RootState) => state.news.items);
