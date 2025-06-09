@@ -1,5 +1,5 @@
 export async function GET() {
-  const res = await fetch(" http://localhost:3000/api/profile");
+  const res = await fetch(" http://localhost:5000/api/profile");
 
   if (!res.ok) {
     return new Response(JSON.stringify({ error: "Failed to fetch data" }), {

@@ -16,8 +16,11 @@ export default function CompanyProfile() {
     dispatch(fetchCompanyProfile());
   }, [dispatch]);
 
-  if (loading || !entry) {
+  if (loading) {
     return <CompanyProfileSkeleton />;
+  }
+  if (!entry) {
+    return <div>NOT AVAILABLE</div>;
   }
 
   return (
