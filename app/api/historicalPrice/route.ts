@@ -2,7 +2,7 @@
 
 // export async function GET() {
 //   const url =
-//     "https://financialmodelingprep.com/api/v3/historical-price-full/AAPL?apikey=8LL2fsCzkr0lE7LHVZdWf7WiQ1owyG8Z";
+//     "https://financialmodelingprep.com/api/v3/historical-price-full/AAPL?apikey=ObRrfBbOcXFMm0cpD07AGO3s9TzQbExu";
 //   const res = await fetch(url);
 
 //   if (!res.ok) {
