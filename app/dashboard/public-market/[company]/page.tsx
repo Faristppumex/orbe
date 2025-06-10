@@ -15,6 +15,7 @@ import RevenueGrowthChart from "@/app/ui/public-market/revenuegrowth";
 import GrossChart from "@/app/ui/public-market/grossmargin";
 import Bar from "@/app/ui/dashboard/bar";
 import EBITBAmargin from "@/app/ui/public-market/EBITDA-margins";
+import Insights from "@/app/ui/public-market/insights";
 
 type Props = {
   params: Promise<{ company: string }>;
@@ -224,7 +225,7 @@ export default function App({ params }: Props) {
         {activeTab === "insights" && (
           <div className="p-4 text-gray-700 text-lg">
             {/* TODO: Replace this with your Insights content */}
-            Insights coming soon...
+            <Insights />
           </div>
         )}
 
