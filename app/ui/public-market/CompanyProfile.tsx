@@ -17,7 +17,6 @@ export default function CompanyProfile({ symbol }: CompanyProfileProps) {
   useEffect(() => {
     if (symbol) {
       dispatch(fetchCompanyProfile(symbol));
-      console.log(symbol + " symbol ");
     }
   }, [dispatch, symbol]);
 
@@ -27,7 +26,6 @@ export default function CompanyProfile({ symbol }: CompanyProfileProps) {
     error,
   } = useAppSelector((state) => state.companyProfile);
 
-  console.log("Redux data ", entry);
   if (loading) {
     return <CompanyProfileSkeleton />;
   }
@@ -52,7 +50,6 @@ export default function CompanyProfile({ symbol }: CompanyProfileProps) {
           </div>
           <div className="ml-2 text-gray-900" style={{ fontSize: "20px" }}>
             {entry.symbol}
-            {console.log(" something ", entry)}
             <div className="flex space-x-3 mt-1">
               <div className="w-fit px-2 h-6 bg-white text-sm rounded-3xl font-light flex justify-center items-center">
                 {entry.symbol}

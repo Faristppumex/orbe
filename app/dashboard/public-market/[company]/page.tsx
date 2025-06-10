@@ -17,12 +17,14 @@ import Bar from "@/app/ui/dashboard/bar";
 import EBITBAmargin from "@/app/ui/public-market/EBITDA-margins";
 
 type Props = {
-  params: { company: string };
+  params: Promise<{ company: string }>;
 };
 
 export default function App({ params }: Props) {
-  const [activeTab, setActiveTab] = useState("profile"); // default tab
-  const companySymbol = params.company?.toUpperCase() || "";
+  // Unwrap params if it's a Promise (future-proof)
+  const { company } = React.use(params);
+  const [activeTab, setActiveTab] = useState("profile");
+  const companySymbol = company?.toUpperCase() || "";
 
   return (
     <section className="w-full px-4 pt-5 pb-5 bg-[#ECF4E9] text-black">

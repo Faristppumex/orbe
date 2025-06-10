@@ -1,9 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { useAppDispatch } from "@/lib/hooks";
-import { fetchCompanyProfile } from "@/app/store/slices/companyProfileSlice";
-import CompanyProfile from "../public-market/CompanyProfile";
+import { useRouter } from "next/navigation"; // <-- Import useRouter
 
 type Stock = {
   symbol: string;
@@ -11,14 +9,12 @@ type Stock = {
 };
 
 export default function Search() {
-  const dispatch = useAppDispatch();
+  const router = useRouter(); // <-- Initialize router
   const [showSearch, setShowSearch] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState<Stock[]>([]);
-  const [selectedSymbol, setSelectedSymbol] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  // Debounce logic
   const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
@@ -42,7 +38,7 @@ export default function Search() {
         setSearchResults([]);
       }
       setLoading(false);
-    }, 500); // 500ms delay
+    }, 500);
 
     return () => {
       if (debounceTimeout.current) clearTimeout(debounceTimeout.current);
@@ -50,11 +46,11 @@ export default function Search() {
   }, [searchInput]);
 
   const handleSelect = (symbol: string) => {
-    setSelectedSymbol(symbol);
     setShowSearch(false);
     setSearchInput("");
     setSearchResults([]);
-    dispatch(fetchCompanyProfile(symbol));
+    // Navigate to the dynamic company page
+    router.push(`/dashboard/public-market/${symbol.toUpperCase()}`);
   };
 
   return (
@@ -103,12 +99,6 @@ export default function Search() {
               )}
             </div>
           </div>
-        </div>
-      )}
-      {/* Show the selected company profile below the search bar */}
-      {selectedSymbol && (
-        <div className="mt-4">
-          <CompanyProfile symbol={selectedSymbol} />
         </div>
       )}
     </div>

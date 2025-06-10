@@ -57,7 +57,6 @@ const companyProfileSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchCompanyProfile.pending, (state) => {
-        console.log("hit");
         state.loading = true;
         state.error = null;
       })
@@ -65,7 +64,6 @@ const companyProfileSlice = createSlice({
         fetchCompanyProfile.fulfilled,
         (state, action: PayloadAction<CompanyProfile>) => {
           state.data = action.payload;
-          console.log(" from Slice ", state.data);
           state.loading = false;
         }
       )
