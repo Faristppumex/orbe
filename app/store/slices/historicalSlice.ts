@@ -17,14 +17,16 @@ const initialState: HistoricalState = {
   error: null,
 };
 
-export const fetchHistorical = createAsyncThunk(
-  "historical/fetchHistorical",
-  async () => {
-    const res = await fetch("http://localhost:5000/api/historical");
-    if (!res.ok) throw new Error("Failed to fetch historical data");
-    return (await res.json()) as HistoricalEntry[];
-  }
-);
+export const fetchHistorical = createAsyncThunk<
+  HistoricalEntry[],
+  string // symbol
+>("historical/fetchHistorical", async (symbol) => {
+  const res = await fetch(
+    `http://localhost:5000/api/historical?symbol=${symbol}`
+  );
+  if (!res.ok) throw new Error("Failed to fetch historical data");
+  return (await res.json()) as HistoricalEntry[];
+});
 
 const historicalSlice = createSlice({
   name: "historical",

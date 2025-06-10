@@ -21,7 +21,7 @@ const RANGE_OPTIONS: { label: string; value: Range }[] = [
   { label: "3 Y", value: "3Y" },
 ];
 
-export default function HistoricalPricesGraph() {
+export default function HistoricalPricesGraph({ symbol }: { symbol: string }) {
   const dispatch = useDispatch<AppDispatch>();
   const {
     data: allData,
@@ -32,8 +32,10 @@ export default function HistoricalPricesGraph() {
   const [selectedRange, setSelectedRange] = useState<Range>("1Y");
 
   useEffect(() => {
-    dispatch(fetchHistorical());
-  }, [dispatch]);
+    if (symbol) {
+      dispatch(fetchHistorical(symbol));
+    }
+  }, [dispatch, symbol]);
 
   useEffect(() => {
     const safeAllData = Array.isArray(allData) ? allData : [];

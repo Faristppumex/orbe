@@ -23,13 +23,13 @@ export default function LatestNewspublic({ symbol }: { symbol: string }) {
   return (
     <section className=" p-4 bg-white rounded-xl ">
       <h2 className="flex items-center font-semibold text-lg mb-2">
-        {/* <Image
+        <Image
           src="/news.svg"
           alt="News icon"
           width={20}
           height={20}
           className="mr-2"
-        /> */}
+        />
         Latest News
         <Image
           src="/DotsThreeVertical.svg"
@@ -42,14 +42,7 @@ export default function LatestNewspublic({ symbol }: { symbol: string }) {
       <hr className="border-gray-200" />
       {loading && <div className="mt-4 text-gray-500">Loading...</div>}
       {error && <div className="mt-4 text-red-500">Error: {error}</div>}
-      {/* <ul className="space-y-3 text-gray-800 mt-4 text-sm">
-        {news.map((point, index) => (
-          <li key={index} className="relative pl-6 leading-relaxed">
-            <span className="absolute left-2 top-2 w-2 h-2 bg-gray-800 rounded-full" />
-            {point}
-          </li>
-        ))}
-      </ul> */}
+
       <ul className="space-y-3 text-gray-800 mt-4 text-sm">
         {news.map((item, index) => (
           <li key={index} className="relative pl-6 leading-relaxed">

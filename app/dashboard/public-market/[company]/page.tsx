@@ -91,7 +91,7 @@ export default function App({ params }: Props) {
             {/* Historical Prices */}
 
             <div className="my-4 mx-2 sm:mx-6 p-4 border shadow rounded-2xl border-gray-300">
-              <HistoricalPricesGraph />
+              <HistoricalPricesGraph symbol={companySymbol} />
             </div>
 
             {/* Key Customers + News */}
