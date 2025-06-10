@@ -101,7 +101,7 @@ export default function App({ params }: Props) {
                 <KeyCustomers />
               </div>
               <div className="w-full md:w-1/2 border shadow border-gray-300 rounded-xl">
-                <LatestNewspublic />
+                <LatestNewspublic symbol={companySymbol} />
               </div>
             </div>
 

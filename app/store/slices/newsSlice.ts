@@ -1,25 +1,66 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
+
+export type NewsItem = {
+  symbol: string;
+  publishedDate: string;
+  publisher: string;
+  title: string;
+  image: string;
+  site: string;
+  text: string;
+  url: string;
+};
 
 interface NewsState {
-  items: string[];
+  items: NewsItem[];
+  loading: boolean;
+  error: string | null;
 }
 
 const initialState: NewsState = {
-  items: [
-    "IBM (International Business Machines Corporation) is a global technology and consulting company that provides enterprise solutions in cloud computing, artificial intelligence, cybersecurity, and hybrid cloud infrastructure.",
-    "IBM offers products and services across key domains including IBM Cloud, IBM Watson (AI), infrastructure services, data & analytics, quantum computing, and security through a mix of software, hardware, and consulting solutions.",
-    "IBM delivers its solutions via a hybrid cloud platform and supports digital transformation through its Red Hat acquisition, strategic partnerships (e.g., AWS, Microsoft), and a strong focus on open-source technologies.",
-    "Founded in 1911, IBM is headquartered in Armonk, New York. It operates in over 175 countries, serves thousands of enterprise clients, and employs more than 280,000 professionals globally.",
-  ],
+  items: [],
+  loading: false,
+  error: null,
 };
 
+// Async thunk to fetch news
+export const fetchNews = createAsyncThunk<NewsItem[], string>(
+  "news/fetchNews",
+  async (symbol) => {
+    const res = await fetch(
+      `http://localhost:5000/api/news?symbol=${symbol}&limit=5`
+    );
+    if (!res.ok) throw new Error("Failed to fetch news");
+
+    return await res.json(); // Expecting an array of news objects
+  }
+);
+
 const newsSlice = createSlice({
-  name: "news",
+  name: "News",
   initialState,
   reducers: {
-    setNews: (state, action: PayloadAction<string[]>) => {
+    setNews: (state, action: PayloadAction<NewsItem[]>) => {
       state.items = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchNews.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(
+        fetchNews.fulfilled,
+        (state, action: PayloadAction<NewsItem[]>) => {
+          state.items = action.payload;
+          state.loading = false;
+        }
+      )
+      .addCase(fetchNews.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Unknown error";
+      });
   },
 });
 
