@@ -98,7 +98,7 @@ export default function CompanyProfile({ symbol }: CompanyProfileProps) {
         </div>
         <div>
           Industry:
-          {entry.industry?.split(",").map((name, idx) => (
+          {entry.industry?.split(",").map((name: string, idx: number) => (
             <span key={idx} className="bg-white border rounded-xl px-1 mr-1">
               {name.trim()}
             </span>

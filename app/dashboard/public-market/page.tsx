@@ -1,7 +1,7 @@
 import LatestNews from "@/app/ui/dashboard/latestnews";
 import Portfolio from "@/app/ui/dashboard/portfolio";
 import Heading from "@/app/ui/dashboard/heading";
-import Table from "@/app/ui/dashboard/table";
+// import Table from "@/app/ui/dashboard/table";
 
 export default function Dashboard() {
   return (
