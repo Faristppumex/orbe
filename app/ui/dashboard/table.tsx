@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../store/store";
+import { RootState } from "@/app/store/store";
 
 export default function CompanyTable() {
   const headings = [

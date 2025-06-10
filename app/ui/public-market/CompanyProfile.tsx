@@ -5,21 +5,33 @@ import { useEffect } from "react";
 import CompanyProfileSkeleton from "@/app/ui/public-markets/companyProfileSkeleton";
 import { fetchCompanyProfile } from "../../store/slices/companyProfileSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+// import { error } from "console";
 
-export default function CompanyProfile() {
+type CompanyProfileProps = {
+  symbol: string;
+};
+
+export default function CompanyProfile({ symbol }: CompanyProfileProps) {
   const dispatch = useAppDispatch();
-  const { data: entry, loading } = useAppSelector(
-    (state) => state.companyProfile
-  );
 
   useEffect(() => {
-    dispatch(fetchCompanyProfile());
-  }, [dispatch]);
+    if (symbol) {
+      dispatch(fetchCompanyProfile(symbol));
+      console.log(symbol + " symbol ");
+    }
+  }, [dispatch, symbol]);
 
+  const {
+    data: entry,
+    loading,
+    error,
+  } = useAppSelector((state) => state.companyProfile);
+
+  console.log("Redux data ", entry);
   if (loading) {
     return <CompanyProfileSkeleton />;
   }
-  if (!entry) {
+  if (!entry || error) {
     return <div>NOT AVAILABLE</div>;
   }
 
@@ -40,6 +52,7 @@ export default function CompanyProfile() {
           </div>
           <div className="ml-2 text-gray-900" style={{ fontSize: "20px" }}>
             {entry.symbol}
+            {console.log(" something ", entry)}
             <div className="flex space-x-3 mt-1">
               <div className="w-fit px-2 h-6 bg-white text-sm rounded-3xl font-light flex justify-center items-center">
                 {entry.symbol}
@@ -60,9 +73,11 @@ export default function CompanyProfile() {
 
         <div className="mt-4 font-semibold text-gray-600 max-w-xl h-auto">
           <div className="mb-4">
-            {entry.description.length > 200
-              ? entry.description.slice(0, 200) + "..."
-              : entry.description}
+            {entry.description
+              ? entry.description.length > 200
+                ? entry.description.slice(0, 200) + "..."
+                : entry.description
+              : "No description available."}
           </div>
           <a href={entry.website} className="text-primary text-sm">
             {entry.website}

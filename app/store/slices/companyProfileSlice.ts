@@ -37,12 +37,16 @@ const initialState: CompanyProfileState = {
   error: null,
 };
 
-export const fetchCompanyProfile = createAsyncThunk(
+export const fetchCompanyProfile = createAsyncThunk<CompanyProfile, string>(
   "companyProfile/fetchCompanyProfile",
-  async () => {
-    const res = await fetch("/api/CompanyProfile");
+  async (symbol) => {
+    const res = await fetch(
+      `http://localhost:5000/api/profile?symbol=${symbol}`
+    );
     if (!res.ok) throw new Error("Failed to fetch company profile");
-    return await res.json();
+    const data = await res.json();
+    // If data is an array, return the first item
+    return Array.isArray(data) ? data[0] : data;
   }
 );
 
@@ -53,6 +57,7 @@ const companyProfileSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchCompanyProfile.pending, (state) => {
+        console.log("hit");
         state.loading = true;
         state.error = null;
       })
@@ -60,6 +65,7 @@ const companyProfileSlice = createSlice({
         fetchCompanyProfile.fulfilled,
         (state, action: PayloadAction<CompanyProfile>) => {
           state.data = action.payload;
+          console.log(" from Slice ", state.data);
           state.loading = false;
         }
       )

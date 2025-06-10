@@ -40,9 +40,7 @@ export default function Sidebar() {
         <SidebarItem icon="/credit.svg" name="Deals" href="/" />
         <SidebarItem icon="/Cardholder.svg" name="Portfolio" href="/" />
         <SidebarItem icon="/Newspaper.svg" name="Insight" href="/" />
-        <div className="hidden md:block">
-          <Search />
-        </div>
+        <div className="hidden md:block"><Search /></div>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useAppDispatch } from "@/lib/hooks";
 import { fetchCompanyProfile } from "@/app/store/slices/companyProfileSlice";
@@ -18,22 +18,36 @@ export default function Search() {
   const [selectedSymbol, setSelectedSymbol] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const handleSearch = async (query: string) => {
-    setSearchInput(query);
-    if (query.length < 1) {
+  // Debounce logic
+  const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    if (searchInput.length < 1) {
       setSearchResults([]);
+      setLoading(false);
       return;
     }
     setLoading(true);
-    try {
-      const res = await fetch(`/api/searchStocks?query=${query}`);
-      const data = await res.json();
-      setSearchResults(data); // [{symbol: "AAPL", name: "Apple Inc."}, ...]
-    } catch {
-      setSearchResults([]);
-    }
-    setLoading(false);
-  };
+
+    if (debounceTimeout.current) clearTimeout(debounceTimeout.current);
+
+    debounceTimeout.current = setTimeout(async () => {
+      try {
+        const res = await fetch(
+          `http://localhost:5000/api/search?query=${searchInput}`
+        );
+        const data = await res.json();
+        setSearchResults(data);
+      } catch {
+        setSearchResults([]);
+      }
+      setLoading(false);
+    }, 500); // 500ms delay
+
+    return () => {
+      if (debounceTimeout.current) clearTimeout(debounceTimeout.current);
+    };
+  }, [searchInput]);
 
   const handleSelect = (symbol: string) => {
     setSelectedSymbol(symbol);
@@ -59,14 +73,14 @@ export default function Search() {
           onClick={() => setShowSearch(false)}
         >
           <div
-            className="bg-white border rounded shadow-lg w-100 p-3"
+            className="bg-white border border-gray-300 rounded shadow-lg w-100 p-3 text-black"
             onClick={(e) => e.stopPropagation()}
           >
             <input
-              className="border px-2 py-1 rounded w-full mb-2"
+              className="border border-gray-300 px-2 py-1 rounded w-full mb-2"
               type="text"
               value={searchInput}
-              onChange={(e) => handleSearch(e.target.value)}
+              onChange={(e) => setSearchInput(e.target.value)}
               placeholder="Search stock symbol..."
               autoFocus
             />
