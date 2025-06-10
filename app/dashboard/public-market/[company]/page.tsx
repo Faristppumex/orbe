@@ -124,7 +124,7 @@ export default function App({ params }: Props) {
             {/* Financials  Table */}
 
             <div className="m-6 rounded-xl shadow border border-gray-300 bg-400 p-4">
-              <FinancialsTable />
+              <FinancialsTable symbol={companySymbol} />
             </div>
 
             {/* Revenue + Gross */}

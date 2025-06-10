@@ -1,11 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import CompanyProfileSkeleton from "@/app/ui/public-markets/companyProfileSkeleton";
 import { fetchCompanyProfile } from "../../store/slices/companyProfileSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-// import { error } from "console";
+import { blue } from "@mui/material/colors";
 
 type CompanyProfileProps = {
   symbol: string;
@@ -13,6 +13,7 @@ type CompanyProfileProps = {
 
 export default function CompanyProfile({ symbol }: CompanyProfileProps) {
   const dispatch = useAppDispatch();
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     if (symbol) {
@@ -70,11 +71,23 @@ export default function CompanyProfile({ symbol }: CompanyProfileProps) {
 
         <div className="mt-4 font-semibold text-gray-600 max-w-xl h-auto">
           <div className="mb-4">
-            {entry.description
-              ? entry.description.length > 200
-                ? entry.description.slice(0, 200) + "..."
-                : entry.description
-              : "No description available."}
+            {entry.description ? (
+              entry.description.length > 200 ? (
+                <>
+                  {entry.description.slice(0, 200)}...
+                  <button
+                    className="ml-2 text-blue-600 underline text-xs"
+                    onClick={() => setShowModal(true)}
+                  >
+                    Read More
+                  </button>
+                </>
+              ) : (
+                entry.description
+              )
+            ) : (
+              "No description available."
+            )}
           </div>
           <a href={entry.website} className="text-primary text-sm">
             {entry.website}
@@ -138,6 +151,55 @@ export default function CompanyProfile({ symbol }: CompanyProfileProps) {
         >
           Regenerate Insights
         </button>
+      </div>
+
+      {/* Modal for full description */}
+      {showModal && <Description entry={entry} setShowModal={setShowModal} />}
+    </div>
+  );
+}
+
+type DescriptionProps = {
+  entry: { description: string; website: string; companyName: string };
+  setShowModal: (show: boolean) => void;
+};
+function Description({ entry, setShowModal }: DescriptionProps) {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+      <div
+        className="bg-white rounded-xl shadow-lg py-6 overflow-y-auto"
+        style={{ width: "40vw", height: "80vh" }}
+      >
+        <div className="flex justify-between items-center px-6 mb-4">
+          <div className="font-bold text-lg">{entry.companyName}</div>
+
+          <button
+            className="text-gray-500 hover:text-gray-800 text-xl"
+            onClick={() => setShowModal(false)}
+            aria-label="Close"
+          >
+            &times;
+          </button>
+        </div>
+        <hr className="mb-2 overflow-x-visible" />
+        <div
+          className="text-gray-700 text-sm whitespace-pre-line px-6 overflow-y-auto"
+          style={{ maxHeight: "70vh", overflowY: "auto" }}
+        >
+          {entry.description}
+        </div>
+        <hr className="mt-5" />
+        <div className="px-6 font-normal text-sm">
+          <div>Company website</div>
+
+          <a
+            href={entry.website}
+            // style={{ color: blue[500] }}
+            className="hover:to-blue-800"
+          >
+            {entry.website}
+          </a>
+        </div>
       </div>
     </div>
   );
