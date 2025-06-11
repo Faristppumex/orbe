@@ -77,7 +77,7 @@ const FinancialsTable: React.FC<FinancialsTableProps> = ({ symbol }) => {
           </button>
         </div>
       </div>
-
+     
       {/* Scrollable Table Container */}
 
       <div className="w-full overflow-x-auto max-w-[1180px]">
@@ -93,7 +93,7 @@ const FinancialsTable: React.FC<FinancialsTableProps> = ({ symbol }) => {
                   key={idx}
                   className="bg-[#1E4841] text-white text-center py-2 px-4 font-medium text-[13px]"
                 >
-                  {h.replace(/^Q\d+\s*/, "")}
+                  {h}
                 </th>
               ))}
             </tr>
