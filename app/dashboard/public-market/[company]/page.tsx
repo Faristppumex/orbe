@@ -17,6 +17,7 @@ import Bar from "@/app/ui/dashboard/bar";
 import EBITBAmargin from "@/app/ui/public-market/EBITDA-margins";
 import Insights from "@/app/ui/public-market/insights";
 import FinancialValuationRatioTable from "@/app/ui/public-market/financialValuationRatios";
+import PressTable from "@/app/ui/public-market/pressRelease";
 
 type Props = {
   params: Promise<{ company: string }>;
@@ -158,7 +159,7 @@ export default function App({ params }: Props) {
                 <p style={{ fontSize: "20px" }} className="font-semibold">
                   Financial Valuation Ratios
                 </p>
-                  <FinancialValuationRatioTable />
+                <FinancialValuationRatioTable />
               </div>
             </div>
 
@@ -182,7 +183,7 @@ export default function App({ params }: Props) {
                 </div>
                 <hr style={{ color: "#EDEDED", fontWeight: "bolder" }} />
                 <div>
-                  <PressTable />
+                  <PressTable symbol={companySymbol} />
                 </div>
               </div>
 
@@ -224,30 +225,6 @@ export default function App({ params }: Props) {
         )}
       </div>
     </section>
-  );
-}
-
-{
-  /** Press Aggregations */
-}
-function PressTable() {
-  const data = [
-    "IBM successfully reduced packaging waste by 18% across its global hardware distribution channels, thanks to a new initiative prioritizing recyclable materials and smart shipment configurations — a move executives say aligns with their circular economy goal ",
-    " IBM's total energy consumption remained flat compared to the previous fiscal year, with marginal gains in efficiency being offset by increased cloud infrastructure demands. Company spokespeople stated that the figures fall within their long-term energy stability targets. ",
-    " Water usage at IBM’s European chip fabrication plants rose by 11% this past year, driven by expanded production in drought-prone regions. Sustainability analysts warn this trend could lead to stricter regulatory scrutiny under evolving EU water management directives. ",
-    " IBM reported a 5.6% year-over-year increase in greenhouse gas emissions from its Asia-Pacific data centers, citing increased AI model training demands and delayed infrastructure upgrades. Environmental advocacy groups have expressed concern over the company’s deviation from its 2030 net-zero roadmap.",
-  ];
-  return (
-    <div>
-      <ul style={{ fontSize: "14px" }}>
-        {data.map((d, i) => (
-          <li key={i} className="m-2 px-4 flex " style={{ color: "" }}>
-            <div className="w-1 h-1 rounded-full bg-gray-700 p-1 m-2"></div>
-            {d}
-          </li>
-        ))}
-      </ul>
-    </div>
   );
 }
 
