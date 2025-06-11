@@ -16,6 +16,7 @@ import GrossChart from "@/app/ui/public-market/grossmargin";
 import Bar from "@/app/ui/dashboard/bar";
 import EBITBAmargin from "@/app/ui/public-market/EBITDA-margins";
 import Insights from "@/app/ui/public-market/insights";
+import FinancialValuationRatioTable from "@/app/ui/public-market/financialValuationRatios";
 
 type Props = {
   params: Promise<{ company: string }>;
@@ -157,21 +158,7 @@ export default function App({ params }: Props) {
                 <p style={{ fontSize: "20px" }} className="font-semibold">
                   Financial Valuation Ratios
                 </p>
-                <div
-                  className="w-41 h-7.5 my-2 rounded-md flex justify-around items-center"
-                  style={{ backgroundColor: "#F4F4F5" }}
-                >
-                  <div className="font-medium" style={{ fontSize: "14px" }}>
-                    Quaterly{" "}
-                  </div>
-                  <div
-                    className="bg-white rounded my-2 font-medium px-3"
-                    style={{ fontSize: "14px" }}
-                  >
-                    Yearly{" "}
-                  </div>
-                </div>
-                <FinancialTable />
+                  <FinancialValuationRatioTable />
               </div>
             </div>
 
@@ -237,57 +224,6 @@ export default function App({ params }: Props) {
         )}
       </div>
     </section>
-  );
-}
-
-function FinancialTable() {
-  const headers = ["", "LTM", "Dec 24", "Dec 23", "Dec 22", "Dec 21"];
-  const rows = [
-    ["EV / Sales", "4.5x", "4.0x", "3.2x", "2.8x", "2.3x"],
-    ["EV / EBITDA", "20.4x", "17.1x", "26.7x", "14.1x", "10.5x"],
-    ["EV / EBIT", "28.1x", "24.9x", "65.7x", "24.1x", "17.9x"],
-    ["EBITDA / Interest Expense", "8.8x", "8.6x", "9.1x", "10.4x", "11.6x"],
-    ["EBIT / Interest Expense", "5.8x", "5.7x", "6.1x", "6.2x", "4.8x"],
-    [
-      "EBITDA - CapEx / Interest Expense",
-      "8.1x",
-      "8.0x",
-      "8.3x",
-      "9.3x",
-      "9.8x",
-    ],
-    ["Total Debt/EV", "0.24x", "0.21x", "0.15x", "0.13x", "0.09x"],
-    ["Price to Earnings", "44.2x", "24.4x", "21.3x", "92.7x", "25.7x"],
-  ];
-
-  return (
-    <div className="overflow-x-auto p-4">
-      <table className="min-w-full border-collapse rounded-lg overflow-hidden">
-        <thead>
-          <tr
-            className=" text-white text-left text-sm"
-            style={{ backgroundColor: "#1E4841" }}
-          >
-            {headers.map((header, i) => (
-              <th key={i} className="px-4 py-2 font-semibold">
-                {header}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody className="text-sm text-gray-800">
-          {rows.map((row, i) => (
-            <tr key={i} className={"bg-white"}>
-              {row.map((cell, j) => (
-                <td key={j} className="px-4 py-2 border-t border-gray-200">
-                  {cell}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
   );
 }
 

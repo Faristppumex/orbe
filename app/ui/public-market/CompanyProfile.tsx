@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import CompanyProfileSkeleton from "@/app/ui/public-markets/companyProfileSkeleton";
 import { fetchCompanyProfile } from "../../store/slices/companyProfileSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import { blue } from "@mui/material/colors";
 
 type CompanyProfileProps = {
   symbol: string;
