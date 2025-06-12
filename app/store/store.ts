@@ -6,6 +6,7 @@ import companyProfileReducer from "./slices/companyProfileSlice";
 import historicalReducer from "./slices/historicalSlice"; // <-- Add this line
 import valuationRatioReducer from "./slices/valuationRatioSlice";
 import pressReleaseReducer from "./slices/pressReleaseSlice"; // <-- Add this line
+import sharedIndexReducer from "./slices/sharedIndexSlice";
 import { useDispatch } from "react-redux";
 // import type { AppDispatch } from "./store";
 
@@ -18,6 +19,7 @@ export const store = configureStore({
     historical: historicalReducer, // <-- Add this line
     valuationRatios: valuationRatioReducer,
     pressRelease: pressReleaseReducer, // <-- Add this line
+    sharedIndex: sharedIndexReducer,
   },
 });
 

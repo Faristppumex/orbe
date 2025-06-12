@@ -1,14 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  Tooltip,
-  //   Legend,
-  ResponsiveContainer,
-} from "recharts";
+import IndexedSharePerformanceChart from "./1-year-shared-index-performance";
 
 import { ArrowUpRight, ArrowDownRight } from "lucide-react";
 
@@ -90,7 +82,7 @@ export default function Insights() {
       </div>
 
       {/** Broker Price targets */}
-      
+
       <div className="border border-gray-300 rounded-xl mx-2 shadow px-4 py-2 my-2 font-semibold text-black">
         Broker Price Targets
         <AnalystTable />
@@ -542,143 +534,3 @@ function MarketDataTable() {
 }
 
 // Sample data: Each entry represents a month
-
-function IndexedSharePerformanceChart() {
-  const data = [
-    {
-      name: "May-24",
-      IBM: 100,
-      DELL: 100,
-      HPE: 100,
-      NTNX: 100,
-      PSTG: 100,
-      NETAPP: 100,
-      6501: 100,
-    },
-    {
-      name: "Jun-24",
-      IBM: 102,
-      DELL: 108,
-      HPE: 98,
-      NTNX: 104,
-      PSTG: 101,
-      NETAPP: 100,
-      6501: 101,
-    },
-    {
-      name: "Jul-24",
-      IBM: 101,
-      DELL: 104,
-      HPE: 96,
-      NTNX: 102,
-      PSTG: 98,
-      NETAPP: 100,
-      6501: 99,
-    },
-    {
-      name: "Sep-24",
-      IBM: 100,
-      DELL: 103,
-      HPE: 97,
-      NTNX: 105,
-      PSTG: 97,
-      NETAPP: 100,
-      6501: 101,
-    },
-    {
-      name: "Nov-24",
-      IBM: 101,
-      DELL: 106,
-      HPE: 98,
-      NTNX: 104,
-      PSTG: 98,
-      NETAPP: 100,
-      6501: 102,
-    },
-    {
-      name: "Jan-25",
-      IBM: 103,
-      DELL: 108,
-      HPE: 99,
-      NTNX: 106,
-      PSTG: 100,
-      NETAPP: 100,
-      6501: 103,
-    },
-    {
-      name: "Mar-25",
-      IBM: 104,
-      DELL: 98,
-      HPE: 96,
-      NTNX: 106,
-      PSTG: 98,
-      NETAPP: 100,
-      6501: 103,
-    },
-    {
-      name: "May-25",
-      IBM: 105.4,
-      DELL: 75.4,
-      HPE: 91,
-      NTNX: 116.37,
-      PSTG: 98.9,
-      NETAPP: 100,
-      6501: 127.05,
-    },
-  ];
-
-  const lineColors = {
-    IBM: "blue",
-    DELL: "red",
-    HPE: "green",
-    NTNX: "#6B7280",
-    PSTG: "purple",
-    NETAPP: "black",
-    6501: "#00C49F",
-  };
-
-  return (
-    <div className="p-4 bg-white ">
-      <h2 className="font-semibold text-gray-800 mb-3 text-lg">
-        1 Year - Index Share Performance
-      </h2>
-      <ResponsiveContainer width="100%" height={300}>
-        <LineChart data={data}>
-          <XAxis dataKey="name" />
-          <YAxis domain={[60, 130]} tickFormatter={(tick) => `${tick}%`} />
-          <Tooltip
-            formatter={(value) =>
-              typeof value === "number" ? `${value.toFixed(1)}%` : `${value}%`
-            }
-          />
-
-          {Object.keys(data[0])
-            .filter((key) => key !== "name")
-            .map((company) => (
-              <Line
-                key={company}
-                type="linear"
-                dataKey={company}
-                stroke={
-                  lineColors[company as keyof typeof lineColors] || "#8884d8"
-                }
-                dot={false}
-                strokeWidth={2}
-              />
-            ))}
-        </LineChart>
-      </ResponsiveContainer>
-      <div className="text-sm text-right mt-2">
-        {/* <ul className="inline-block text-xs space-y-1 text-gray-600">
-          <li className="text-blue-600">IBM (50.4%)</li>
-          <li className="text-[#00C49F]">6501 (27.05%)</li>
-          <li className="text-gray-600">NTNX (16.37%)</li>
-          <li className="text-green-600">HPE (11%)</li>
-          <li className="text-purple-600">PSTG (8.9%)</li>
-          <li className="text-black">NTAP (0.0%)</li>
-          <li className="text-red-600">DELL (-24.6%)</li>
-        </ul> */}
-      </div>
-    </div>
-  );
-}
