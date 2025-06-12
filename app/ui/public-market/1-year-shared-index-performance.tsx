@@ -32,12 +32,31 @@ export default function IndexedSharePerformanceChart() {
   }, [dispatch]);
 
   // Transform API data to recharts format, using date and only last 1 year
+  // Define the expected structure of each data point
+  type StockDataPoint = { date: string; close: number };
+
   const chartData = React.useMemo(() => {
     const keys = Object.keys(data);
     if (keys.length === 0) return [];
 
     // Use the first stock's data as reference
-    const reference = data[keys[0]] || [];
+    const reference: StockDataPoint[] =
+      Array.isArray(data[keys[0]]) &&
+      (data[keys[0]] as unknown[]).every(
+        (item) =>
+          typeof item === "object" &&
+          item !== null &&
+          "date" in item &&
+          "close" in item
+      )
+        ? (data[keys[0]] as unknown[]).filter(
+            (item): item is StockDataPoint =>
+              typeof item === "object" &&
+              item !== null &&
+              "date" in item &&
+              "close" in item
+          )
+        : [];
     // Sort by date descending (most recent first)
     const sortedDesc = [...reference].sort(
       (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
@@ -48,11 +67,16 @@ export default function IndexedSharePerformanceChart() {
       .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
     // Build chart data for each date, doubling the values
+    type ChartPoint = { date: string } & { [key: string]: number | null | string };
     return lastYear.map((entry, idx) => {
-      const point: any = { date: entry.date };
+      const point: ChartPoint = { date: entry.date };
       keys.forEach((k) => {
         // Double the close value
-        const close = data[k][data[k].length - lastYear.length + idx]?.close;
+        const dataPoint = data[k][data[k].length - lastYear.length + idx];
+        const close =
+          dataPoint && typeof dataPoint === "object" && "close" in dataPoint
+            ? (dataPoint as { close: number }).close
+            : null;
         point[k] = typeof close === "number" ? close * 2 : null;
       });
       return point;
@@ -63,7 +87,7 @@ export default function IndexedSharePerformanceChart() {
   const xTicks = React.useMemo(() => {
     if (!chartData.length) return [];
     const result: string[] = [];
-    let lastMonth = null;
+    let lastMonth: number | null = null;
     chartData.forEach((point) => {
       const d = new Date(point.date);
       const month = d.getMonth();
