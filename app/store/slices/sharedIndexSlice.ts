@@ -31,10 +31,13 @@ const sharedIndexSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchSharedIndex.fulfilled, (state, action: PayloadAction<Record<string, number[]>>) => {
-        state.loading = false;
-        state.data = action.payload;
-      })
+      .addCase(
+        fetchSharedIndex.fulfilled,
+        (state, action: PayloadAction<Record<string, number[]>>) => {
+          state.loading = false;
+          state.data = action.payload;
+        }
+      )
       .addCase(fetchSharedIndex.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || "Unknown error";
