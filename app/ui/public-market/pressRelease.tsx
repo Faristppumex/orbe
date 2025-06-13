@@ -9,13 +9,20 @@ export default function PressTable({ symbol = "IBM" }: { symbol?: string }) {
     items = [],
     loading,
     error,
-  } = useSelector((state: RootState) => state.pressRelease);
+  }: { items: string[]; loading: boolean; error: string | null } = useSelector(
+    (state: RootState) => state.pressRelease
+  );
 
   useEffect(() => {
     if (symbol) {
       dispatch(fetchPressReleases(symbol));
     }
   }, [dispatch, symbol]);
+
+  // Only show the first 6 non-empty points (skip any empty or non-bullet lines)
+  const bulletPoints = items
+    .filter((line) => typeof line === "string" && line.trim().length > 0)
+    .slice(0, 6);
 
   return (
     <div>
@@ -24,15 +31,10 @@ export default function PressTable({ symbol = "IBM" }: { symbol?: string }) {
       )}
       {error && <div className="text-red-500 text-sm px-4 py-2">{error}</div>}
       <ul style={{ fontSize: "14px" }} className="space-y-2">
-        {items.map((d, i) => (
-          <li key={i} className="m-2 px-4 flex ">
-            <div className="w-1 h-1 rounded-full bg-gray-700 p-1 m-2 "></div>
-            {/* Show the title or the string itself if d is a string */}
-            <div>
-              <div className="line-clamp-3">
-                {typeof d === "string" ? d : d.title}
-              </div>
-            </div>
+        {bulletPoints.map((point, i) => (
+          <li key={i} className="m-2 px-4 flex line-clamp-3">
+            <div className="w-1 h-1 rounded-full bg-gray-700 p-1 m-2"></div>
+            <div className="line-clamp-3">{point}</div>
           </li>
         ))}
       </ul>

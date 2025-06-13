@@ -1,16 +1,58 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState: string[] = [
-  "IBM (International Business Machines Corporation) is a global technology and consulting company that provides enterprise solutions in cloud computing, artificial intelligence, cybersecurity, and hybrid cloud infrastructure.",
-  "IBM offers products and services across key domains including IBM Cloud, IBM Watson (AI), infrastructure services, data & analytics, quantum computing, and security through a mix of software, hardware, and consulting solutions.",
-  "IBM delivers its solutions via a hybrid cloud platform and supports digital transformation through its Red Hat acquisition, strategic partnerships (e.g., AWS, Microsoft), and a strong focus on open-source technologies.",
-  "Founded in 1911, IBM is headquartered in Armonk, New York. It operates in over 175 countries, serves thousands of enterprise clients, and employs more than 280,000 professionals globally.",
-];
+// Async thunk to fetch company overview points for a symbol
+export const fetchCompanyOverviewPoints = createAsyncThunk(
+  "companyOverviewPoints/fetch",
+  async ({ symbol, ai }: { symbol: string; ai?: boolean }) => {
+    const params = new URLSearchParams({
+      symbol,
+      ...(ai ? { ai: "true" } : {}),
+    });
+    const res = await fetch(
+      `http://localhost:5000/api/company-overview?${params.toString()}`
+    );
+    if (!res.ok) throw new Error("Failed to fetch company overview points");
+
+    console.log("hit on front");
+    // console.log(res.json());
+    return await res.json(); // expecting string[]
+  }
+);
+
+interface CompanyOverviewPointsState {
+  items: string[];
+  loading: boolean;
+  error: string | null;
+}
+
+const initialState: CompanyOverviewPointsState = {
+  items: [],
+  loading: false,
+  error: null,
+};
 
 const companyOverviewPointsSlice = createSlice({
   name: "companyOverviewPoints",
   initialState,
   reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchCompanyOverviewPoints.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(
+        fetchCompanyOverviewPoints.fulfilled,
+        (state, action: PayloadAction<string[]>) => {
+          state.loading = false;
+          state.items = action.payload;
+        }
+      )
+      .addCase(fetchCompanyOverviewPoints.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Unknown error";
+      });
+  },
 });
 
 export default companyOverviewPointsSlice.reducer;

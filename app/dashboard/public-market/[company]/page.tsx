@@ -80,7 +80,7 @@ export default function App({ params }: Props) {
 
             <div className="flex flex-col md:flex-row gap-4 my-4 mx-2 sm:mx-6">
               <div className="w-full md:w-1/2 p-4 border rounded-xl border-gray-300 shadow">
-                <CompanyOverview />
+                <CompanyOverview symbol={companySymbol} />
               </div>
               <div
                 className="w-full md:w-1/2 p-4 border rounded-xl border-gray-300
@@ -182,9 +182,7 @@ export default function App({ params }: Props) {
                   <div>Press Release Aggregations</div>
                 </div>
                 <hr style={{ color: "#EDEDED", fontWeight: "bolder" }} />
-                <div>
-                  <PressTable symbol={companySymbol} />
-                </div>
+                <div>{/* <PressTable symbol={companySymbol} /> */}</div>
               </div>
 
               {/**Key Competitors */}
