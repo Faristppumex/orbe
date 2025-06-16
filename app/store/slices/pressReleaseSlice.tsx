@@ -1,5 +1,10 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
+interface CombinedReportResponse {
+  companyOverview: string[];
+  pressReleaseSummary: string[];
+}
+
 interface PressReleaseState {
   items: string[];
   loading: boolean;
@@ -12,17 +17,32 @@ const initialState: PressReleaseState = {
   error: null,
 };
 
-// Example async thunk for fetching press releases
-export const fetchPressReleases = createAsyncThunk(
-  "pressRelease/fetch",
-  async (symbol: string) => {
+// Async thunk for fetching press releases
+export const fetchPressReleases = createAsyncThunk<
+  string[], // Return type
+  string, // Argument type (symbol)
+  { rejectValue: string } // Type for thunkAPI.rejectWithValue
+>("pressRelease/fetch", async (symbol, { rejectWithValue }) => {
+  try {
     const res = await fetch(
-      `http://localhost:5000/api/press-release?symbol=${symbol}`
+      `http://localhost:5000/api/combined-report?symbol=${symbol}`
     );
-    if (!res.ok) throw new Error("Failed to fetch press releases");
-    return await res.json(); // Expecting string[]
+    if (!res.ok) {
+      const errorData = await res.json();
+      return rejectWithValue(
+        errorData.message || "Failed to fetch press releases"
+      );
+    }
+    const data: CombinedReportResponse = await res.json();
+    return data.pressReleaseSummary; // Return only the pressReleaseSummary part
+  } catch (error) {
+    if (error instanceof Error) {
+      return rejectWithValue(error.message || "An unknown error occurred");
+    } else {
+      return rejectWithValue("An unknown error occured");
+    }
   }
-);
+});
 
 const pressReleaseSlice = createSlice({
   name: "pressRelease",
@@ -38,12 +58,12 @@ const pressReleaseSlice = createSlice({
         fetchPressReleases.fulfilled,
         (state, action: PayloadAction<string[]>) => {
           state.loading = false;
-          state.items = action.payload;
+          state.items = action.payload; // Payload is already the pressReleaseSummary array
         }
       )
       .addCase(fetchPressReleases.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || "Unknown error";
+        state.error = action.payload || "Unknown error";
       });
   },
 });

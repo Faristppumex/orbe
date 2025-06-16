@@ -46,7 +46,10 @@ const FinancialsTable: React.FC<FinancialsTableProps> = ({ symbol }) => {
     valueIndexes = headers
       .map((h, idx) => (h.startsWith("Q1") ? idx : -1))
       .filter((idx) => idx !== -1);
-    displayHeaders = valueIndexes.map((idx) => headers[idx]);
+    displayHeaders = valueIndexes.map((idx) => {
+      const header = headers[idx];
+      return header.substring(2).trimStart();
+    });
   }
 
   return (
@@ -77,7 +80,7 @@ const FinancialsTable: React.FC<FinancialsTableProps> = ({ symbol }) => {
           </button>
         </div>
       </div>
-     
+
       {/* Scrollable Table Container */}
 
       <div className="w-full overflow-x-auto max-w-[1180px]">
@@ -102,11 +105,11 @@ const FinancialsTable: React.FC<FinancialsTableProps> = ({ symbol }) => {
             {Object.entries(data).map(([section, rows], idx) => (
               <React.Fragment key={section}>
                 {/* Section Title */}
-                <tr>
+                <tr className="sticky left-0">
                   <td
                     colSpan={displayHeaders.length + 2}
-                    className={`py-3 font-semibold text-gray-800 text-[13px] ${
-                      idx !== 0 ? "pt-6 border-t border-gray-200" : ""
+                    className={`py-3 font-semibold text-gray-800 text-[13px]  ${
+                      idx !== 0 ? " pt-6 border-t border-gray-200" : ""
                     }`}
                   >
                     {section}
@@ -120,10 +123,10 @@ const FinancialsTable: React.FC<FinancialsTableProps> = ({ symbol }) => {
 
                   return (
                     <tr key={label} className="border-t border-gray-100">
-                      <td className="sticky left-0 z-10 py-2 pl-24 pr-0 text-gray-700 whitespace-nowrap bg-white">
+                      <td className="sticky left-0 z-10 py-2 pl-24 pr-0 text-gray-700 whitespace-nowrap ">
                         {label}
                       </td>
-                      <td className="py-2 pl-0 pr-16 text-right text-gray-800 whitespace-nowrap bg-gray-50">
+                      <td className="py-2 pl-0 pr-16 text-right text-gray-800 itespace-nowrap ">
                         $
                         {(ltm / 1_000_000_000).toLocaleString("en-US", {
                           minimumFractionDigits: 2,
@@ -135,7 +138,7 @@ const FinancialsTable: React.FC<FinancialsTableProps> = ({ symbol }) => {
                         ? valueIndexes.map((i) => (
                             <td
                               key={i}
-                              className="py-2 pl-0 pr-16 text-right text-gray-800 whitespace-nowrap"
+                              className="py-2 pl-0 pr-16 text-right text-gray-800 bg-[white] whitespace-nowrap"
                             >
                               $
                               {(

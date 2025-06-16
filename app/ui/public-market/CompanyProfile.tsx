@@ -144,12 +144,12 @@ export default function CompanyProfile({ symbol }: CompanyProfileProps) {
             )
           </div>
         </div>
-        <button
+        {/* <button
           className="mt-5 rounded-3xl px-4 py-2 bg-green-300 text-base font-medium w-fit"
           onClick={() => alert("hello dear, there is nothing to Regenerate")}
         >
           Regenerate Insights
-        </button>
+        </button> */}
       </div>
 
       {/* Modal for full description */}

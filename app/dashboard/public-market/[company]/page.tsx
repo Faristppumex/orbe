@@ -32,7 +32,7 @@ export default function App({ params }: Props) {
   return (
     <section className="w-full px-4 pt-5 pb-5 bg-[#ECF4E9] text-black">
       {/* Header */}
-      ...
+
       {/* Main Container */}
       <div className="flex flex-col w-full rounded-2xl bg-white">
         <div className="my-4 mx-2 sm:mx-6">
@@ -50,9 +50,8 @@ export default function App({ params }: Props) {
             {/* Sentiment & Deal Score */}
 
             <div className="flex flex-col sm:flex-row gap-3 my-4 mx-2 sm:mx-6">
-              <div className="flex items-center justify-center text-xs font-medium bg-[#F7F1FF] text-[#6B7271] px-4 py-2 rounded">
-                Sentiment Score:{" "}
-                <span className="text-[#9747FF] ml-1">Positive</span>
+              <div className="flex items-center justify-center text-xs font-medium bg-[#dededf] text-[#6B7271] px-4 py-2 rounded">
+                Sentiment Score: <span className="text-[#9747FF] ml-1">9</span>
                 <Image
                   className="ml-2"
                   src="/info.svg"
@@ -61,10 +60,10 @@ export default function App({ params }: Props) {
                   height={16}
                 />
               </div>
-              <div className="flex items-center justify-center text-xs font-medium bg-[#F6FDF3] text-[#6B7271] px-4 py-2 rounded border">
+              <div className="flex items-center justify-center text-xs font-medium bg-[#F6FDF3] text-[#6B7271] px-4 py-2 rounded ">
                 Deal Score:
                 <div className="w-5 h-5 bg-[#BBF49C] text-black font-bold text-xs rounded-full flex items-center justify-center ml-2">
-                  84
+                  8
                 </div>
                 <Image
                   className="ml-2"
@@ -182,7 +181,9 @@ export default function App({ params }: Props) {
                   <div>Press Release Aggregations</div>
                 </div>
                 <hr style={{ color: "#EDEDED", fontWeight: "bolder" }} />
-                <div>{/* <PressTable symbol={companySymbol} /> */}</div>
+                <div>
+                  <PressTable symbol={companySymbol} />
+                </div>
               </div>
 
               {/**Key Competitors */}

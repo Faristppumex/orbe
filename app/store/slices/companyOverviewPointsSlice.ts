@@ -1,21 +1,37 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
-// Async thunk to fetch company overview points for a symbol
-export const fetchCompanyOverviewPoints = createAsyncThunk(
+interface CombinedReportResponse {
+  companyOverview: string[];
+  pressReleaseSummary: string[];
+}
+
+// Async thunk to fetch company overview points
+export const fetchCompanyOverviewPoints = createAsyncThunk<
+  string[], // Return type of the thunk's payload
+  { symbol: string; ai?: boolean }, // Arguments type
+  { rejectValue: string } // Type for thunkAPI.rejectWithValue
+>(
   "companyOverviewPoints/fetch",
-  async ({ symbol, ai }: { symbol: string; ai?: boolean }) => {
+  async ({ symbol, ai }, { rejectWithValue }) => {
     const params = new URLSearchParams({
       symbol,
       ...(ai ? { ai: "true" } : {}),
     });
-    const res = await fetch(
-      `http://localhost:5000/api/company-overview?${params.toString()}`
-    );
-    if (!res.ok) throw new Error("Failed to fetch company overview points");
-
-    console.log("hit on front");
-    // console.log(res.json());
-    return await res.json(); // expecting string[]
+    try {
+      const res = await fetch(
+        `http://localhost:5000/api/combined-report?${params.toString()}`
+      );
+      if (!res.ok) {
+        const errorData = await res.json();
+        return rejectWithValue(
+          errorData.message || "Failed to fetch company overview points"
+        );
+      }
+      const data: CombinedReportResponse = await res.json();
+      return data.companyOverview; // Return only the companyOverview part
+    } catch (error: any) {
+      return rejectWithValue(error.message || "An unknown error occurred");
+    }
   }
 );
 
@@ -45,12 +61,12 @@ const companyOverviewPointsSlice = createSlice({
         fetchCompanyOverviewPoints.fulfilled,
         (state, action: PayloadAction<string[]>) => {
           state.loading = false;
-          state.items = action.payload;
+          state.items = action.payload; // Payload is already the companyOverview array
         }
       )
       .addCase(fetchCompanyOverviewPoints.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || "Unknown error";
+        state.error = action.payload || "Unknown error";
       });
   },
 });
