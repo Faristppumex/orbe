@@ -30,6 +30,7 @@ export const fetchFinancials = createAsyncThunk<
   );
   if (!res.ok) throw new Error("Failed to fetch financials");
   const json = await res.json();
+  console.log(json.headers);
   return {
     headers: json.headers,
     data: json.data,

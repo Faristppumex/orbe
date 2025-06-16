@@ -30,6 +30,7 @@ export default function HistoricalPricesGraph({ symbol }: { symbol: string }) {
   } = useSelector((state: RootState) => state.historical);
   const [seriesData, setSeriesData] = useState<{ x: number; y: number }[]>([]);
   const [selectedRange, setSelectedRange] = useState<Range>("1Y");
+  const [selected, setSelected] = useState<"bar" | "line">("bar");
 
   useEffect(() => {
     if (symbol) {
@@ -73,25 +74,39 @@ export default function HistoricalPricesGraph({ symbol }: { symbol: string }) {
     setSeriesData(transformed);
   }, [allData, selectedRange]);
 
+  // Chart type depends on toggle
+  const chartType = selected === "line" ? "area" : "bar";
+
+  // Adjust options for bar/line
   const options: ApexOptions = {
     chart: {
-      type: "area",
+      type: chartType,
       height: 350,
       zoom: { enabled: false },
       toolbar: { show: false },
     },
     grid: { show: false },
     dataLabels: { enabled: false },
-    stroke: { curve: "straight", width: 1.5 },
-    fill: {
-      type: "gradient",
-      gradient: {
-        shadeIntensity: 1,
-        opacityFrom: 0.4,
-        opacityTo: 0,
-        stops: [0, 90, 100],
-      },
-    },
+    stroke:
+      chartType === "area"
+        ? { curve: "straight", width: 1.5 }
+        : { show: false },
+    fill:
+      chartType === "area"
+        ? {
+            type: "gradient",
+            gradient: {
+              shadeIntensity: 1,
+              opacityFrom: 1,
+              opacityTo: 0,
+              stops: [0, 90, 100],
+              inverseColors: false,
+              gradientToColors: ["#888"],
+              shade: "dark",
+              type: "vertical",
+            },
+          }
+        : { type: "solid" },
     tooltip: {
       x: { format: "MMM dd, yyyy" },
       y: {
@@ -162,13 +177,32 @@ export default function HistoricalPricesGraph({ symbol }: { symbol: string }) {
         </div>
       </div>
 
-      <div className="w-23 bg-blue-50 flex ml-6 mt-1 rounded-md items-center">
-        <div style={{ fontSize: "14px" }} className="ml-3">
+      <div className="w-23 h-5 bg-blue-50 flex ml-6 mt-1 rounded-md items-center">
+        <div
+          onClick={() => setSelected("bar")}
+          style={{
+            fontSize: "14px",
+            backgroundColor: selected === "bar" ? "white" : "transparent",
+            fontWeight: selected === "bar" ? "bold" : "normal",
+            cursor: "pointer",
+          }}
+          className={`h-4 w-8 flex items-center justify-center rounded-md ml-3 transition-colors ${
+            selected === "bar" ? "" : "text-gray-600"
+          }`}
+        >
           Bar
         </div>
         <div
-          style={{ fontSize: "14px", backgroundColor: "white" }}
-          className="h-4 w-8 flex items-center justify-center rounded-md ml-6"
+          onClick={() => setSelected("line")}
+          style={{
+            fontSize: "14px",
+            backgroundColor: selected === "line" ? "white" : "transparent",
+            fontWeight: selected === "line" ? "bold" : "normal",
+            cursor: "pointer",
+          }}
+          className={`h-4 w-8 flex items-center justify-center rounded-md ml-6 transition-colors ${
+            selected === "line" ? "" : "text-gray-600"
+          }`}
         >
           Line
         </div>
@@ -177,7 +211,7 @@ export default function HistoricalPricesGraph({ symbol }: { symbol: string }) {
       <ReactApexChart
         options={options}
         series={series}
-        type="area"
+        type={chartType}
         height={350}
       />
     </div>
