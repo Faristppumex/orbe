@@ -9,7 +9,7 @@ import pressReleaseReducer from "./slices/pressReleaseSlice"; // <-- Add this li
 import sharedIndexReducer from "./slices/sharedIndexSlice";
 import { useDispatch } from "react-redux";
 import companyOverviewPointsReducer from "./slices/companyOverviewPointsSlice"; // <-- Add this line
-// import type { AppDispatch } from "./store";
+import summaryReducer from "./slices/SummarySlice";
 
 export const store = configureStore({
   reducer: {
@@ -22,6 +22,7 @@ export const store = configureStore({
     pressRelease: pressReleaseReducer, // <-- Add this line
     sharedIndex: sharedIndexReducer,
     companyOverviewPoints: companyOverviewPointsReducer, // <-- Add this line
+    summary: summaryReducer,
   },
 });
 

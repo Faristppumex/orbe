@@ -32,6 +32,8 @@ const FinancialsTable: React.FC<FinancialsTableProps> = ({ symbol }) => {
 
   // Reverse headers for latest quarter first
   const reversedHeaders = useMemo(() => [...headers].reverse(), [headers]);
+  console.log("something in financial Table");
+  console.log(","+ reversedHeaders);
 
   // For Quarterly: LTM + all quarters (latest first)
   const quarterlyValueIndexes = useMemo(() => {
@@ -53,6 +55,12 @@ const FinancialsTable: React.FC<FinancialsTableProps> = ({ symbol }) => {
       ? 1 + reversedHeaders.length // 1 for LTM, rest for quarters
       : yearlyHeaders.length + 1; // years + metric column
 
+  if (loading) {
+    return <div>Loading</div>;
+  }
+  if (error) {
+    return <div>Data Unavailable </div>;
+  }
   return (
     <div className="p-4 bg-white rounded-xl font-sans text-[13px] text-gray-800 h-full">
       {/* Header Section */}
@@ -182,7 +190,7 @@ const FinancialsTable: React.FC<FinancialsTableProps> = ({ symbol }) => {
                               .filter((i) => i !== -1);
                             // Sum the values for these indices
                             const sum = quarterIndices.reduce((acc, i) => {
-                              const val = parseFloat((values as number[])[i]);
+                              const val = (values as number[])[i];
                               return acc + (isNaN(val) ? 0 : val);
                             }, 0);
                             return (
