@@ -10,6 +10,7 @@ interface CurrentCapitalizationState {
   points: CapitalizationPoint[];
 }
 
+
 const initialState: CurrentCapitalizationState = {
   points: [
     {
