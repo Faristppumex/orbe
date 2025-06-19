@@ -10,6 +10,7 @@ import sharedIndexReducer from "./slices/sharedIndexSlice";
 import { useDispatch } from "react-redux";
 import companyOverviewPointsReducer from "./slices/companyOverviewPointsSlice"; // <-- Add this line
 import summaryReducer from "./slices/SummarySlice";
+import currentCapitalizationReducer from "@/app/store/slices/currentCapitalizationSlice";
 
 export const store = configureStore({
   reducer: {
@@ -23,6 +24,7 @@ export const store = configureStore({
     sharedIndex: sharedIndexReducer,
     companyOverviewPoints: companyOverviewPointsReducer, // <-- Add this line
     summary: summaryReducer,
+    currentCapitalization: currentCapitalizationReducer,
   },
 });
 
