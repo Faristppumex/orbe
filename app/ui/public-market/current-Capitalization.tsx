@@ -1,11 +1,25 @@
-import Image from "next/image";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useAppDispatch } from "@/app/store/store";
+import { fetchCapitalization } from "@/app/store/slices/currentCapitalizationSlice";
 import { RootState } from "@/app/store/store";
-
-export default function CurrentCapital() {
-  const points = useSelector(
-    (state: RootState) => state.currentCapitalization.points
+import Image from "next/image";
+export default function Capitalization({ symbol }: { symbol: string }) {
+  const dispatch = useAppDispatch();
+  const { data, loading, error } = useSelector(
+    (state: RootState) => state.currentCapitalization
   );
+
+  useEffect(() => {
+    dispatch(fetchCapitalization(symbol));
+  }, [dispatch, symbol]);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div className="text-red-500">{error}</div>;
+  if (!data.length) return <div>No data found.</div>;
+
+  const latest = data[data.length - 1]; // Get the latest entry
+  const basicSharesOutstanding = latest.metrics.weightedAverageShsOut;
 
   return (
     <div>
@@ -33,25 +47,33 @@ export default function CurrentCapital() {
         <p>1000</p>
       </div>
       <hr style={{ color: "#EDEDED", fontWeight: "bolder" }} />
-      <ul className="space-y-3 text-gray-800 text-md pl-2 pt-2 pr-1 mt-2 ">
-        {points.map((point, index) => {
-          const isBoldBg = point.priority === "bold with background";
-          return (
-            <li
-              key={index}
-              className={`px-2 ${
-                isBoldBg ? "font-bold bg-gray-100 rounded" : ""
-              }`}
-            >
-              <div className="mx-4 flex justify-end">
-                <div className="mr-auto">{point.title}</div>
-                <div>{point.price}</div>
-              </div>
-              <hr style={{ color: "#EDEDED" }} />
-            </li>
-          );
-        })}
-      </ul>
+
+      <div className="space-y-2 ">
+        <p className="ml-3 text-[14px]">
+          Basic Share Outstanding{" "}
+          <span className="ml-95">
+            ${basicSharesOutstanding / 1000000000} B
+          </span>
+        </p>
+        <p className="ml-3 text-[14px] bg-gray-50 font-semibold">
+          Market Capitalization
+        </p>
+        <p className="ml-3 text-[14px]">Fully Diluted Shares Outstanding</p>
+        <p className="ml-3 text-[14px] bg-gray-50 font-semibold">
+          Fully Diluted Market Cap
+        </p>
+        <p className="ml-3 text-[14px]">Consolidated Debt</p>
+        <p className="ml-3  text-[14px]">
+          Cash and Equivalents{" "}
+          <span className="ml-100">
+            ${latest.metrics.cashAndCashEquivalents / 1000000000} B
+          </span>
+        </p>
+        <p className="ml-3 text-[14px]">Non-Controlling Interest</p>
+        <p className="ml-3 text-[14px] bg-gray-50 font-semibold">
+          Enterprise Value
+        </p>
+      </div>
     </div>
   );
 }

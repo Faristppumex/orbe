@@ -1,65 +1,74 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
-export interface CapitalizationPoint {
-  title: string;
-  price: string;
-  priority: string;
+export interface CapitalizationMetrics {
+  totalDebt: number;
+  cashAndCashEquivalents: number;
+  minorityInterest: number;
+  weightedAverageShsOut: number;
+  weightedAverageShsOutDil: number;
+}
+
+export interface CapitalizationApiItem {
+  date: string;
+  fiscalyear: number;
+  fiscalquarter: number;
+  period: string;
+  metrics: CapitalizationMetrics;
 }
 
 interface CurrentCapitalizationState {
-  points: CapitalizationPoint[];
+  data: CapitalizationApiItem[];
+  loading: boolean;
+  error: string | null;
 }
 
-
 const initialState: CurrentCapitalizationState = {
-  points: [
-    {
-      title: "Basic Shares Outstanding",
-      price: "$10000",
-      priority: "",
-    },
-    {
-      title: "Market Capitalization",
-      price: "$10000",
-      priority: "bold with background",
-    },
-    {
-      title: "Fully Diluted Shares Outstanding",
-      price: "$10000",
-      priority: "",
-    },
-    {
-      title: "Fully Diluted Market Cap",
-      price: "$10000",
-      priority: "bold with background",
-    },
-    {
-      title: "Consolidated Debt",
-      price: "$10000",
-      priority: "",
-    },
-    {
-      title: "Cash and Equivalents",
-      price: "$10000",
-      priority: "normal",
-    },
-    {
-      title: "Non Controlling Interest",
-      price: "$10000",
-      priority: "normal",
-    },
-    {
-      title: "Enterprise Value",
-      price: "$10000",
-      priority: "bold with background",
-    },
-  ],
+  data: [],
+  loading: false,
+  error: null,
 };
+
+export const fetchCapitalization = createAsyncThunk<
+  CapitalizationApiItem[],
+  string,
+  { rejectValue: string }
+>("currentCapitalization/fetch", async (symbol, { rejectWithValue }) => {
+  try {
+    const res = await fetch(
+      `http://localhost:5000/api/capitalization?symbol=${symbol}`
+    );
+    if (!res.ok) {
+      return rejectWithValue("Failed to fetch capitalization data");
+    }
+    const data = await res.json();
+    return data as CapitalizationApiItem[];
+  } catch {
+    return rejectWithValue("Network error");
+  }
+});
 
 const currentCapitalizationSlice = createSlice({
   name: "currentCapitalization",
   initialState,
   reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchCapitalization.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(
+        fetchCapitalization.fulfilled,
+        (state, action: PayloadAction<CapitalizationApiItem[]>) => {
+          state.loading = false;
+          state.data = action.payload;
+        }
+      )
+      .addCase(fetchCapitalization.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || "Unknown error";
+      });
+  },
 });
 
 export default currentCapitalizationSlice.reducer;
