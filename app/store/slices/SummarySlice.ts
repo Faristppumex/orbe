@@ -12,6 +12,8 @@ const initialState: SummaryState = {
   error: null,
 };
 
+
+
 export const fetchEarningCallTranscript = createAsyncThunk<
   string[], // Only the content strings
   { symbol: string; year: number; quarter: number },

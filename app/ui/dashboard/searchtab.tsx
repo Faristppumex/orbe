@@ -50,7 +50,9 @@ export default function Search() {
     setSearchInput("");
     setSearchResults([]);
     // Navigate to the dynamic company page
-    router.push(`/dashboard/public-market/${symbol.toUpperCase()}`);
+    router.push(
+      `/dashboard/public-market/${symbol.toUpperCase()}/companyProfile`
+    );
   };
 
   return (

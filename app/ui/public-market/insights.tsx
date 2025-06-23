@@ -1,10 +1,12 @@
 import Image from "next/image";
-import React, { useEffect } from "react";
+// import React, { useEffect } from "react";
 import IndexedSharePerformanceChart from "./1-year-shared-index-performance";
 import { ArrowUpRight, ArrowDownRight } from "lucide-react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "@/app/store/store";
-import { fetchEarningCallTranscript } from "@/app/store/slices/SummarySlice";
+// import { fetchEarningCallTranscript } from "@/app/store/slices/SummarySlice";
+// import { useAppDispatch } from "@/app/store/store";
+import Summary from "./summary";
 
 export default function Insights() {
   return (
@@ -22,28 +24,10 @@ export default function Insights() {
       </div>
 
       {/* summary and sentimental analysis */}
-      <div className="flex gap-4 ">
+      <div className="flex gap-4  ">
         {/* Summary */}
-        <div className=" ml-2 mt-4 mb-4 w-1/2 border border-gray-300 rounded-xl shadow">
-          <div className="h-10 flex">
-            <Image
-              src="/summary-icon.svg"
-              alt="s"
-              width={20}
-              height={20}
-              className="ml-3"
-            />
-            <p className=" content-center ml-4 my-2 font-semibold text-black">
-              Summary
-            </p>
-            <button className=" rounded ml-auto mr-3 border border-gray-300  justify-center items-center text-black px-2 text-sm my-2">
-              View More {">"}
-            </button>
-          </div>
-          <hr style={{ color: "#EDEDED", fontWeight: "bolder" }} />
-          <div className="">
-            <Summary />
-          </div>
+        <div className=" ml-2 mt-4 mb-4 w-1/2 border border-gray-300 rounded-xl shadow ">
+          <Summary />
         </div>
 
         {/* Sentimental analysis */}
@@ -73,7 +57,7 @@ export default function Insights() {
       {/* Consensus vs Actual */}
       <div className="border border-gray-300 rounded-xl mx-2 shadow px-4 pt-2 font-semibold text-black">
         Consensus Vs Actual
-        <ConsensusVsActual />
+        <ConsensusTable />
       </div>
 
       {/* Broker Price targets */}
@@ -98,48 +82,6 @@ export default function Insights() {
       <div className="border border-gray-300 rounded-xl mx-2 shadow px-4 py-2 my-2 font-semibold text-black">
         <IndexedSharePerformanceChart />
       </div>
-    </div>
-  );
-}
-
-function Summary() {
-  const dispatch = useDispatch();
-  const {
-    transcripts = [],
-    loading = false,
-    error = null,
-  } = useSelector((state: RootState) => state.summary) || {};
-
-  // Set your desired symbol, year, and quarter here
-  const symbol = "AAPL";
-  const year = 2025;
-  const quarter = 1;
-
-  useEffect(() => {
-    dispatch(fetchEarningCallTranscript({ symbol, year, quarter }));
-  }, [dispatch, symbol, year, quarter]);
-
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div className="text-red-500">{error}</div>;
-  if (!transcripts.length) return <div>No summary available.</div>;
-
-  return (
-    <div
-      className="m-2 space-y-2 text-black line-clamp-12"
-      style={{ fontSize: "14px" }}
-    >
-      {transcripts.map((t, i) => (
-        <li className="line-clamp-6" key={i}>
-          <span className="mt-2 mr-2 w-2 h-2 bg-gray-700 rounded-full inline-block"></span>
-          {t}
-        </li>
-      ))}
-      {transcripts.map((t, i) => (
-        <li className="line-clamp-6 " key={i}>
-          <span className="mt-2 mr-2 w-2 h-2 bg-gray-700 rounded-full inline-block"></span>
-          {t}
-        </li>
-      ))}
     </div>
   );
 }
@@ -210,41 +152,10 @@ function SentimentalAnalysis() {
   );
 }
 
-function ConsensusVsActual() {
-  const headers = [
-    "",
-    "Actuals",
-    "Consensus(Medium)",
-    "Beat/Miss%",
-    "Guide low",
-    "Guide High",
-    "Beat/Miss %",
-  ];
-  const rows = [
-    [
-      "Revenue",
-      "$ 14,541.0",
-      "$ 14,390.5",
-      "0.8%",
-      "$ 16,349",
-      "$ 16,400.0",
-      "2.0%",
-    ],
-    [
-      "Gross Income",
-      "$  7,670.0",
-      "$ 7,660.0",
-      "0.2%",
-      "$44.0",
-      "$45.2",
-      "1.4%",
-    ],
-    ["Operating Income", "$15,9", "$15,8", "0.6%", "$15.5", "$16.2", ""],
-    ["EBITDA", "8.8x", "8.6x", "9.1x", "10.4x", "11.6x", ""],
-    ["Free Cash Flow", "5.8x", "5.7x", "6.1x", "6.2x", "4.8x", ""],
-    ["Net Income", "8.1x", "8.0x", "8.3x", "9.3x", "9.8x", ""],
-    ["Earning Per Share", "0.24x", "0.21x", "0.15x", "0.13x", "0.09x", ""],
-  ];
+function ConsensusTable() {
+  const { headers, rows } = useSelector(
+    (state: RootState) => state.consensusTable
+  );
 
   return (
     <div className="overflow-x-auto py-4">
@@ -387,84 +298,6 @@ function MarketDataTable() {
       evEbitda2025: "16.2x",
       evFcf2024: "23.1x",
       evFcf2025: "20.6x",
-    },
-    {
-      name: "Hitachi",
-      price: 25.55,
-      pctHigh: "86.6%",
-      marketCap: "116,685",
-      ev: "114,514",
-      evRev2024: "1.7x",
-      evRev2025: "1.6x",
-      evEbitda2024: "12.1x",
-      evEbitda2025: "11.0x",
-      evFcf2024: "27.2x",
-      evFcf2025: "25.1x",
-    },
-    {
-      name: "Dell",
-      price: 132.36,
-      pctHigh: "52.6%",
-      marketCap: "68,470",
-      ev: "89,600",
-      evRev2024: "0.9x",
-      evRev2025: "0.9x",
-      evEbitda2024: "8.2x",
-      evEbitda2025: "7.5x",
-      evFcf2024: "10.0x",
-      evFcf2025: "9.8x",
-    },
-    {
-      name: "Hewlett Packard Enterprise",
-      price: 16.67,
-      pctHigh: "67.6%",
-      marketCap: "24,291",
-      ev: "26,683",
-      evRev2024: "0.9x",
-      evRev2025: "0.9x",
-      evEbitda2024: "5.0x",
-      evEbitda2025: "4.0x",
-      evFcf2024: "12.5x",
-      evFcf2025: "11.1x",
-    },
-    {
-      name: "Nutanix",
-      price: 72.43,
-      pctHigh: "90.5%",
-      marketCap: "21,448",
-      ev: "20,558",
-      evRev2024: "8.9x",
-      evRev2025: "7.7x",
-      evEbitda2024: "43.7x",
-      evEbitda2025: "35.0x",
-      evFcf2024: "32.5x",
-      evFcf2025: "28.7x",
-    },
-    {
-      name: "NetApp",
-      price: 87.62,
-      pctHigh: "87.8%",
-      marketCap: "20,143",
-      ev: "19,876",
-      evRev2024: "3.1x",
-      evRev2025: "2.9x",
-      evEbitda2024: "9.9x",
-      evEbitda2025: "9.1x",
-      evFcf2024: "14.0x",
-      evFcf2025: "13.4x",
-    },
-    {
-      name: "PureStorage",
-      price: 47.58,
-      pctHigh: "64.6%",
-      marketCap: "15,366",
-      ev: "15,366",
-      evRev2024: "4.6x",
-      evRev2025: "4.1x",
-      evEbitda2024: "29.4x",
-      evEbitda2025: "22.9x",
-      evFcf2024: "29.9x",
-      evFcf2025: "26.7x",
     },
   ];
 
