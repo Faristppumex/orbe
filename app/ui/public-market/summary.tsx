@@ -54,8 +54,7 @@ export default function Summary() {
           onClick={() => setExpanded(!expanded)}
         >
           <div className="flex items-center gap-2">
-            <div className="text-sm">View More</div>
-            <div></div>
+            <div className="">View More</div>
           </div>
         </button>
       </div>
@@ -66,13 +65,7 @@ export default function Summary() {
           style={{ fontSize: "14px" }}
         >
           {transcripts.map((t, i) => (
-            <li className="line-clamp-6" key={i}>
-              <span className="mt-2 mr-2 w-2 h-2 bg-gray-700 rounded-full inline-block"></span>
-              {t}
-            </li>
-          ))}
-          {transcripts.map((t, i) => (
-            <li className="line-clamp-6 " key={i}>
+            <li className="line-clamp-15" key={i}>
               <span className="mt-2 mr-2 w-2 h-2 bg-gray-700 rounded-full inline-block"></span>
               {t}
             </li>

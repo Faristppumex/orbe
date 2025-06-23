@@ -1,49 +1,62 @@
+// import React from "react";
 "use client";
+import { useSelector } from "react-redux";
+import { RootState } from "@/app/store/store";
+import { useAppDispatch } from "@/app/store/store";
+import { fetchEarningCallTranscript } from "@/app/store/slices/SummarySlice";
+import React, { useEffect } from "react";
+import { useState } from "react";
+import { useParams } from "next/navigation";
 
-type Props = {
-  params: Promise<{ company: string }>;
-};
+export default function Summary() {
+  const dispatch = useAppDispatch();
+  const params = useParams();
+  // const router = useRouter();
+  const { transcripts = [] } =
+    useSelector((state: RootState) => state.summary) || {};
+  const symbol = params.company as string; // Set your desired symbol
 
-export default function App({}: Props) {
+  const [year, setYear] = useState(2025);
+  const [quarter, setQuarter] = useState(1);
+
+  useEffect(() => {
+    dispatch(fetchEarningCallTranscript({ symbol, year, quarter }));
+  }, [dispatch, symbol, year, quarter]);
   return (
-    <section className="w-full px-4 pt-5 pb-5 bg-[#ECF4E9] text-black">
-      {/* Header */}
+    <div className="h-full w-full p-3 bg-[#ECF4E9]">
+      <div className="flex h-full min-h-500 w-full rounded-2xl p-3  bg-[#ffff] text-black">
+        <div className=" min-w-60 p-3 border-2 max-h-60 mt-20 rounded border-gray-300">
+          Filter
+          <label className="block mb-1">Year</label>
+          <select
+            className="block w-full mb-4 p-2 border border-gray-300 rounded"
+            value={year}
+            onChange={(e) => setYear(Number(e.target.value))}
+          >
+            <option value={2025}>2025</option>
+            <option value={2024}>2024</option>
+            <option value={2023}>2023</option>
+          </select>
+          <label className="block mb-1">Quarter</label>
+          <select
+            className="block w-full mb-4 p-2 border border-gray-300 rounded"
+            value={quarter}
+            onChange={(e) => setQuarter(Number(e.target.value))}
+          >
+            <option value={1}>1</option>
+            <option value={2}>2</option>
+            <option value={3}>3</option>
+            <option value={4}>4</option>
+          </select>
+        </div>
 
-      {/* Main Container */}
-      <div className="flex flex-col w-full min-h-full rounded-2xl bg-white">
-        <div className="my-4 mx-2 sm:mx-6"></div>
-
-        <div className="p-4 flex text-gray-700 text-lg ">
-          <div className=" h-60 w-100 border-2 border-gray-300 rounded-xl ">
-            <button className="border m-2 p-2 rounded border-gray-300 hover:bg-gray-400 hover:text-white">
-              sort by sentiment
-            </button>
-            <div className="border m-2 px-4 py-2 h-fit rounded border-gray-300">
-              Filters
-              <div>
-                <button className="border m-2 p-2 rounded border-gray-300 hover:bg-gray-400 hover:text-white ">
-                  Filter by Year
-                </button>
-                <button className="border m-2 p-2 rounded border-gray-300 hover:bg-gray-400 hover:text-white  ">
-                  Filter by Quarter
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="mx-4 font-black text-xl w-fit">
-            Insight Differentiator Summary
-            <div className="text-md font-normal mt-2 alighn-left text-gray-600">
-              lourem epsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </div>
-          </div>
+        <div className="flex-1 p-10">
+          <h1 className="text-2xl font-bold mb-4">
+            Insights Differentiator Summary
+          </h1>
+          <div className="text-gray-  700 mb-4">{transcripts[0]}</div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
