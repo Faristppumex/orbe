@@ -16,14 +16,20 @@ export default function PressTable({ symbol = "IBM" }: { symbol?: string }) {
   useEffect(() => {
     if (symbol) {
       dispatch(fetchPressReleases(symbol));
+      console.log("Fetching press releases for symbol:", symbol);
     }
   }, [dispatch, symbol]);
 
   // Only show the first 6 non-empty points (skip any empty or non-bullet lines)
-  const bulletPoints = items
-    .filter((line) => typeof line === "string" && line.trim().length > 0)
-    .slice(0, 6);
 
+  interface bulletPoints {
+    text: string;
+    title: string;
+    sentiment: string;
+  }
+  const bulletPoints = items;
+
+  console.log("Bullet points:", items);
   return (
     <div>
       {loading && (
@@ -34,7 +40,13 @@ export default function PressTable({ symbol = "IBM" }: { symbol?: string }) {
         {bulletPoints.map((point, i) => (
           <li key={i} className="m-2 px-4 flex line-clamp-3">
             <div className="w-1 h-1 rounded-full bg-gray-700 p-1 m-2"></div>
-            <div className="line-clamp-3">{point}</div>
+            <div
+              className={`line-clamp-3 ${
+                point.sentiment == "Positive" ? "text-green-600" : ""
+              } ${point.sentiment == "Negative" ? "text-red-600" : ""}`}
+            >
+              {point.text}
+            </div>
           </li>
         ))}
       </ul>

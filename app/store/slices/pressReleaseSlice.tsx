@@ -2,7 +2,9 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
 interface CombinedReportResponse {
   companyOverview: string[];
-  pressReleaseSummary: string[];
+  pressReleases: string[];
+  keyCompetitors: string[];
+  keyCustomers: string[];
 }
 
 interface PressReleaseState {
@@ -25,7 +27,7 @@ export const fetchPressReleases = createAsyncThunk<
 >("pressRelease/fetch", async (symbol, { rejectWithValue }) => {
   try {
     const res = await fetch(
-      `http://localhost:5000/api/combined-report?symbol=${symbol}`
+      `http://localhost:5000/api/combined-report?symbols=${symbol}`
     );
     if (!res.ok) {
       const errorData = await res.json();
@@ -34,7 +36,7 @@ export const fetchPressReleases = createAsyncThunk<
       );
     }
     const data: CombinedReportResponse = await res.json();
-    return data.pressReleaseSummary; // Return only the pressReleaseSummary part
+    return data.pressReleases; // Return only the pressReleases array
   } catch (error) {
     if (error instanceof Error) {
       return rejectWithValue(error.message || "An unknown error occurred");
@@ -63,7 +65,8 @@ const pressReleaseSlice = createSlice({
       )
       .addCase(fetchPressReleases.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload || "Unknown error";
+        state.error =
+          typeof action.payload === "string" ? action.payload : "Unknown error";
       });
   },
 });

@@ -32,8 +32,6 @@ const FinancialsTable: React.FC<FinancialsTableProps> = ({ symbol }) => {
 
   // Reverse headers for latest quarter first
   const reversedHeaders = useMemo(() => [...headers].reverse(), [headers]);
-  console.log("something in financial Table");
-  console.log(","+ reversedHeaders);
 
   // For Quarterly: LTM + all quarters (latest first)
   const quarterlyValueIndexes = useMemo(() => {

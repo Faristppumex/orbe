@@ -3,15 +3,25 @@ import { useSelector } from "react-redux";
 import { useAppDispatch } from "@/app/store/store";
 import { fetchCapitalization } from "@/app/store/slices/currentCapitalizationSlice";
 import { RootState } from "@/app/store/store";
+import { fetchCompanyProfile } from "@/app/store/slices/companyProfileSlice";
 import Image from "next/image";
+
 export default function Capitalization({ symbol }: { symbol: string }) {
   const dispatch = useAppDispatch();
   const { data, loading, error } = useSelector(
     (state: RootState) => state.currentCapitalization
   );
 
+  const { data: companyProfile } = useSelector(
+    (state: RootState) => state.companyProfile
+  );
+
   useEffect(() => {
     dispatch(fetchCapitalization(symbol));
+  }, [dispatch, symbol]);
+
+  useEffect(() => {
+    dispatch(fetchCompanyProfile(symbol));
   }, [dispatch, symbol]);
 
   if (loading) return <div>Loading...</div>;
@@ -19,7 +29,34 @@ export default function Capitalization({ symbol }: { symbol: string }) {
   if (!data.length) return <div>No data found.</div>;
 
   const latest = data[data.length - 1]; // Get the latest entry
+  const sharePrice = companyProfile?.price || 0;
+
   const basicSharesOutstanding = latest.metrics.weightedAverageShsOut;
+  const marketCapitalization = basicSharesOutstanding * sharePrice;
+  const fullyDilutedSharesOutstanding =
+    latest.metrics.weightedAverageShsOutDil || basicSharesOutstanding;
+  const fullyDilutedMarketCap = sharePrice * fullyDilutedSharesOutstanding;
+  const consolidatedDebt = latest.metrics?.totalDebt || 0;
+  const cashAndEquivalents = latest.metrics?.cashAndCashEquivalents || 0;
+  const nonControllingInterest = latest.metrics?.minorityInterest || 0;
+  const enterpriseValue =
+    marketCapitalization +
+    consolidatedDebt +
+    nonControllingInterest -
+    cashAndEquivalents;
+
+  // Helper to format value dynamically to B, M, or K
+  function formatNumber(value: number): string {
+    const abs = Math.abs(value);
+    if (abs >= 1_000_000_000) {
+      return (value / 1_000_000_000).toFixed(1) + "B";
+    } else if (abs >= 1_000_000) {
+      return (value / 1_000_000).toFixed(1) + "M";
+    } else if (abs >= 1_000) {
+      return (value / 1_000).toFixed(1) + "K";
+    }
+    return value.toString();
+  }
 
   return (
     <div>
@@ -44,35 +81,57 @@ export default function Capitalization({ symbol }: { symbol: string }) {
       <hr style={{ color: "#EDEDED", fontWeight: "bolder" }} />
       <div className="mt-2 ml-2 mr-4 flex justify-between">
         <p className="">Price</p>
-        <p>1000</p>
+        <p>${sharePrice.toLocaleString()}</p>
       </div>
       <hr style={{ color: "#EDEDED", fontWeight: "bolder" }} />
 
-      <div className="space-y-2 ">
-        <p className="ml-3 text-[14px]">
-          Basic Share Outstanding{" "}
-          <span className="ml-95">
-            ${basicSharesOutstanding / 1000000000} B
+      <div className="space-y-3 pr-3">
+        <div className="flex justify-between w-full ml-3 text-[16px]">
+          <span>Basic Shares Outstanding</span>
+          <span className="font-semibold">
+            {formatNumber(basicSharesOutstanding)}
           </span>
-        </p>
-        <p className="ml-3 text-[14px] bg-gray-50 font-semibold">
-          Market Capitalization
-        </p>
-        <p className="ml-3 text-[14px]">Fully Diluted Shares Outstanding</p>
-        <p className="ml-3 text-[14px] bg-gray-50 font-semibold">
-          Fully Diluted Market Cap
-        </p>
-        <p className="ml-3 text-[14px]">Consolidated Debt</p>
-        <p className="ml-3  text-[14px]">
-          Cash and Equivalents{" "}
-          <span className="ml-100">
-            ${latest.metrics.cashAndCashEquivalents / 1000000000} B
+        </div>
+        <div className="flex justify-between w-full ml-3 text-[16px] bg-gray-200 font-semibold">
+          <span>Market Capitalization</span>
+          <span className="font-normal">
+            ${formatNumber(marketCapitalization)}
           </span>
-        </p>
-        <p className="ml-3 text-[14px]">Non-Controlling Interest</p>
-        <p className="ml-3 text-[14px] bg-gray-50 font-semibold">
-          Enterprise Value
-        </p>
+        </div>
+        <div className="flex justify-between w-full ml-3 text-[16px]">
+          <span>Fully Diluted Shares Outstanding</span>
+          <span className="font-semibold">
+            {formatNumber(fullyDilutedSharesOutstanding)}
+          </span>
+        </div>
+        <div className="flex justify-between w-full ml-3 text-[16px] bg-gray-200 font-semibold">
+          <span>Fully Diluted Market Cap</span>
+          <span className="font-normal">
+            ${formatNumber(fullyDilutedMarketCap)}
+          </span>
+        </div>
+        <div className="flex justify-between w-full ml-3 text-[16px]">
+          <span>Consolidated Debt</span>
+          <span className="font-semibold">
+            ${formatNumber(consolidatedDebt)}
+          </span>
+        </div>
+        <div className="flex justify-between w-full ml-3 text-[16px]">
+          <span>Cash and Equivalents</span>
+          <span className="font-semibold">
+            ${formatNumber(cashAndEquivalents)}
+          </span>
+        </div>
+        <div className="flex justify-between w-full ml-3 text-[16px]">
+          <span>Non-Controlling Interest</span>
+          <span className="font-semibold">
+            ${formatNumber(nonControllingInterest)}
+          </span>
+        </div>
+        <div className="flex justify-between w-full ml-3 text-[16px] bg-gray-200 font-semibold">
+          <span>Enterprise Value</span>
+          <span className="font-normal">${formatNumber(enterpriseValue)}</span>
+        </div>
       </div>
     </div>
   );
