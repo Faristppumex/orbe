@@ -85,7 +85,7 @@ export default function App({ params }: Props) {
                 className="w-full md:w-1/2 p-4 border rounded-xl border-gray-300
             shadow"
               >
-                <CurrentCapital />
+                <CurrentCapital symbol={companySymbol} />
               </div>
             </div>
 

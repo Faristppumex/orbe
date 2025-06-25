@@ -2,7 +2,9 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
 interface CombinedReportResponse {
   companyOverview: string[];
-  pressReleaseSummary: string[];
+  pressRelease: string[];
+  keyCustomers: string[];
+  keyCompetitors: string[];
 }
 
 // Async thunk to fetch company overview points
@@ -29,8 +31,8 @@ export const fetchCompanyOverviewPoints = createAsyncThunk<
       }
       const data: CombinedReportResponse = await res.json();
       return data.companyOverview; // Return only the companyOverview part
-    } catch (error: any) {
-      return rejectWithValue(error.message || "An unknown error occurred");
+    } catch {
+      return rejectWithValue("An unknown error occurred");
     }
   }
 );

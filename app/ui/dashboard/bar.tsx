@@ -2,12 +2,7 @@ import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-interface BarProps {
-  value: string;
-  onChange: (value: string) => void;
-}
-
-const Bar: React.FC<BarProps> = () => {
+const Bar = () => {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -27,17 +22,26 @@ const Bar: React.FC<BarProps> = () => {
     { id: "files", label: "Files", icon: "/icon_files.svg", route: "files" },
   ];
 
+  // Extract [company] from the current path
+  // Example: /dashboard/public-market/IBM/insights
+  const getCompanyFromPath = () => {
+    const parts = pathname.split("/");
+    const idx = parts.findIndex((p) => p === "public-market");
+    return idx !== -1 && parts.length > idx + 1 ? parts[idx + 1] : "";
+  };
+
+  const company = getCompanyFromPath();
+
   // Determine active tab from the current route
   const getActiveTabFromPath = () => {
     if (pathname.includes("/insights")) return "insights";
     if (pathname.includes("/companyProfile")) return "companyProfile";
-    if (pathname.includes("/files")) return "files";
+    if (pathname.toLowerCase().includes("/files")) return "files";
     return "companyProfile"; // default
   };
 
   const [activeTab, setActiveTab] = useState(getActiveTabFromPath());
 
-  // Update activeTab when route changes
   useEffect(() => {
     setActiveTab(getActiveTabFromPath());
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -45,9 +49,8 @@ const Bar: React.FC<BarProps> = () => {
 
   const handleTabChange = (tabId: string, route: string) => {
     setActiveTab(tabId);
-    // Build the new route based on your app structure
-    // If your bar is always under /dashboard/public-market/[company]/, adjust as needed
-    router.push(`${window.location.pathname}/../${route}`);
+    // Build the new route: /dashboard/public-market/[company]/[route]
+    router.push(`/dashboard/public-market/${company}/${route}`);
   };
 
   return (

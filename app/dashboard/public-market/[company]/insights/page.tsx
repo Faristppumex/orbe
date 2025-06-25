@@ -9,7 +9,7 @@ type Props = {
 
 export default function App({}: Props) {
   // Unwrap params if it's a Promise (future-proof)
-  const [activeTab, setActiveTab] = useState("insights");
+  const [activeTab] = useState("insights");
 
   return (
     <section className="w-full px-4 pt-5 pb-5 bg-[#ECF4E9] text-black">
@@ -18,7 +18,7 @@ export default function App({}: Props) {
       {/* Main Container */}
       <div className="flex flex-col w-full rounded-2xl bg-white">
         <div className="my-4 mx-2 sm:mx-6">
-          <Bar value={activeTab} onChange={setActiveTab} />
+          <Bar />
         </div>
 
         {activeTab === "insights" && (
@@ -27,7 +27,6 @@ export default function App({}: Props) {
             <Insights />
           </div>
         )}
-
       </div>
     </section>
   );

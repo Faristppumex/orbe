@@ -5,6 +5,7 @@ import { useAppDispatch } from "@/app/store/store";
 import { fetchEarningCallTranscript } from "@/app/store/slices/SummarySlice";
 import { RootState } from "@/app/store/store";
 import { useRouter } from "next/navigation";
+import { LuChevronRight } from "react-icons/lu";
 
 export default function Summary() {
   const dispatch = useAppDispatch();
@@ -50,11 +51,13 @@ export default function Summary() {
         </div>
         <button
           data-slot="button"
-          className=" border w-24 h-7 p-0.5 rounded-lg bg-white text-black hover:bg-gray-200 my-2 mr-2"
+          className=" border  h-7 p-0.5 rounded-lg bg-white text-black hover:bg-gray-200 my-2 mr-2"
           onClick={() => setExpanded(!expanded)}
         >
-          <div className="flex items-center gap-2">
-            <div className="">View More</div>
+          <div className="flex  gap-2">
+            <div className="flex items-center">
+              View More <LuChevronRight className="" />
+            </div>
           </div>
         </button>
       </div>
