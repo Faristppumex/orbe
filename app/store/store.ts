@@ -1,6 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
 import financialsReducer from "./slices/financialSlice";
-import companyReducer from "./slices/companyProfileSlice";
 import newsReducer from "./slices/newsSlice";
 import companyProfileReducer from "./slices/companyProfileSlice";
 import historicalReducer from "./slices/historicalSlice"; // <-- Add this line
@@ -12,11 +11,11 @@ import companyOverviewPointsReducer from "./slices/companyOverviewPointsSlice"; 
 import summaryReducer from "./slices/SummarySlice";
 import currentCapitalizationReducer from "@/app/store/slices/currentCapitalizationSlice";
 import consensusTableReducer from "./slices/consensusTableSlice";
-
+import keyCompetitorsReducer from "./slices/keyCompetitors"; // <-- Add this line
+import KeyCustomersReducer from "./slices/keyCustomers";
 export const store = configureStore({
   reducer: {
     financials: financialsReducer,
-    company: companyReducer,
     news: newsReducer,
     companyProfile: companyProfileReducer,
     historical: historicalReducer, // <-- Add this line
@@ -27,6 +26,8 @@ export const store = configureStore({
     summary: summaryReducer,
     currentCapitalization: currentCapitalizationReducer,
     consensusTable: consensusTableReducer,
+    keyCompetitors: keyCompetitorsReducer, // <-- Add this line
+    keyCustomers: KeyCustomersReducer,
   },
 });
 

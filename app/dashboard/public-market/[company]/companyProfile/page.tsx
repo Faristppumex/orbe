@@ -5,7 +5,8 @@ import Image from "next/image";
 import CompanyOverview from "@/app/ui/public-market/companyOverview";
 import CurrentCapital from "@/app/ui/public-market/current-Capitalization";
 import HistoricalPricesGraph from "@/app/ui/public-market/historical-prices-graph";
-import KeyCustomers from "@/app/ui/public-market/key-customers";
+import KeyCompetitors from "@/app/ui/public-market/keyCompetitors";
+import KeyCustomers from "@/app/ui/public-market/keyCustomers";
 import Market from "@/app/ui/public-market/market";
 import LatestNewspublic from "@/app/ui/public-market/latestNews";
 import FinancialsTable from "@/app/ui/public-market/financial";
@@ -26,7 +27,7 @@ type Props = {
 export default function App({ params }: Props) {
   // Unwrap params if it's a Promise (future-proof)
   const { company } = React.use(params);
-  const [activeTab, setActiveTab] = useState("profile");
+  const [activeTab] = useState("profile");
   const companySymbol = company?.toUpperCase() || "";
 
   return (
@@ -36,7 +37,7 @@ export default function App({ params }: Props) {
       {/* Main Container */}
       <div className="flex flex-col w-full rounded-2xl bg-white">
         <div className="my-4 mx-2 sm:mx-6">
-          <Bar value={activeTab} onChange={setActiveTab} />
+          <Bar />
         </div>
 
         {activeTab === "profile" && (
@@ -99,7 +100,7 @@ export default function App({ params }: Props) {
 
             <div className="flex flex-col md:flex-row gap-4 my-4 mx-2 sm:mx-6">
               <div className="w-full md:w-1/2 p-4 border border-gray-300 shadow rounded-xl">
-                <KeyCustomers />
+                <KeyCustomers symbol={companySymbol} />
               </div>
               <div className="w-full md:w-1/2 border shadow border-gray-300 rounded-xl">
                 <LatestNewspublic symbol={companySymbol} />
@@ -201,7 +202,7 @@ export default function App({ params }: Props) {
                 </div>
                 <hr style={{ color: "#EDEDED", fontWeight: "bolder" }} />
                 <div>
-                  <Competitors />
+                  <KeyCompetitors symbol={companySymbol} />
                 </div>
                 <div></div>
               </div>

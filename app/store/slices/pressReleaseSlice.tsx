@@ -36,6 +36,7 @@ export const fetchPressReleases = createAsyncThunk<
       );
     }
     const data: CombinedReportResponse = await res.json();
+    console.log(data.pressReleases);
     return data.pressReleases; // Return only the pressReleases array
   } catch (error) {
     if (error instanceof Error) {

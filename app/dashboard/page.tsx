@@ -1,3 +1,8 @@
+import Dashboard from "./public-market/page";
 export default function APP() {
-  return <div>DASHBOARD</div>;
+  return (
+    <div>
+      <Dashboard />
+    </div>
+  );
 }

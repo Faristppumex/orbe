@@ -3,33 +3,33 @@ import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "@/app/store/store";
 import { fetchPressReleases } from "@/app/store/slices/pressReleaseSlice";
 
+// Define the correct type for a press release item
+interface BulletPoint {
+  text: string;
+  title: string;
+  sentiment: string;
+}
+
 export default function PressTable({ symbol = "IBM" }: { symbol?: string }) {
   const dispatch = useAppDispatch();
   const {
     items = [],
     loading,
     error,
-  }: { items: string[]; loading: boolean; error: string | null } = useSelector(
-    (state: RootState) => state.pressRelease
-  );
+  }: {
+    items: BulletPoint[];
+    loading: boolean;
+    error: string | null;
+  } = useSelector((state: RootState) => state.pressRelease);
 
   useEffect(() => {
     if (symbol) {
       dispatch(fetchPressReleases(symbol));
-      console.log("Fetching press releases for symbol:", symbol);
     }
   }, [dispatch, symbol]);
 
-  // Only show the first 6 non-empty points (skip any empty or non-bullet lines)
-
-  interface bulletPoints {
-    text: string;
-    title: string;
-    sentiment: string;
-  }
   const bulletPoints = items;
 
-  console.log("Bullet points:", items);
   return (
     <div>
       {loading && (
@@ -42,10 +42,14 @@ export default function PressTable({ symbol = "IBM" }: { symbol?: string }) {
             <div className="w-1 h-1 rounded-full bg-gray-700 p-1 m-2"></div>
             <div
               className={`line-clamp-3 ${
-                point.sentiment == "Positive" ? "text-green-600" : ""
-              } ${point.sentiment == "Negative" ? "text-red-600" : ""}`}
+                point.sentiment === "Positive"
+                  ? "text-green-600"
+                  : point.sentiment === "Negative"
+                  ? "text-red-600"
+                  : ""
+              }`}
             >
-              {point.text}
+              {point.title}
             </div>
           </li>
         ))}
