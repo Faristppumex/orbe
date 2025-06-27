@@ -4,4 +4,9 @@ const nextConfig: NextConfig = {
   /* config options here */
 };
 
+module.exports = {
+  images: {
+    domains: ["images.financialmodelingprep.com"],
+  },
+};
 export default nextConfig;

@@ -11,13 +11,35 @@ export default function KeyCustomers({ symbol }: { symbol: string }) {
     (state: RootState) => state.keyCustomers
   );
   useEffect(() => {
-    console.log("keyCustomers symbol", symbol);
     dispatch(fetchKeyCustomers(symbol));
   }, [dispatch, symbol]);
   if (loading) {
-    return <div>Loading</div>;
+    return (
+      <div className="">
+        <hr style={{ color: "#EDEDED", fontWeight: "bolder" }} />
+        <div className="flex mt-6 ml-6 gap-x-22 gap-y-10 flex-wrap">
+          {[...Array(5)].map((_, idx) => (
+            <div
+              key={idx}
+              className="flex flex-col items-center justify-center animate-pulse"
+            >
+              <div className="bg-gray-300 w-15 h-15 rounded-full mb-2" />
+              <div className="h-4 w-20 bg-gray-200 rounded" />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
   }
-  console.log("key customers", keyCustomers);
+  if (keyCustomers.length == 0) {
+    return (
+      <div className="flex items-center justify-center h-full bg-gray-100 rounded">
+        <span className="text-gray-500 text-lg font-semibold">
+          Data Not Found
+        </span>
+      </div>
+    );
+  }
   function extractCustomersNames(arr: string[]): string[] {
     const names: string[] = [];
     for (let i = 0; i < arr.length; i++) {

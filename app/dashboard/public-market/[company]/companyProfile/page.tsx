@@ -165,31 +165,22 @@ export default function App({ params }: Props) {
 
             {/**Press Release Aggregations and Key Customers */}
 
-            <div className="m-6 md:flex   gap-4 space-y-4 ">
+            <div className="md:flex gap-4 space-y-4 ">
               {/**Pres release Aggregations */}
-
-              <div className=" rounded-xl md:w-1/2 h-100 border border-gray-300 shadow ">
-                <div
-                  className="px-4 h-10 flex space-x-2 font-semibold items-center"
-                  style={{ fontSize: "20px" }}
-                >
-                  <Image
-                    src={"/press-icon.svg"}
-                    alt="s"
-                    width={20}
-                    height={20}
-                  />
-                  <div>Press Release Aggregations</div>
-                </div>
-                <hr style={{ color: "#EDEDED", fontWeight: "bolder" }} />
-                <div>
+              <div className="flex flex-col md:flex-row gap-4 my-4 mx-2 sm:mx-6  w-full h-80 ">
+                <div className="w-full md:w-1/2 p-4 border border-gray-300 shadow rounded-xl">
                   <PressTable symbol={companySymbol} />
                 </div>
+
+                <div className="w-full h-full md:w-1/2 border shadow border-gray-300 rounded-xl h-min-80">
+                  <KeyCompetitors symbol={companySymbol} />
+                </div>
               </div>
+            
 
               {/**Key Competitors */}
 
-              <div className=" rounded-xl md:w-1/2 h-100 border border-gray-300 shadow">
+              {/* <div className=" rounded-xl md:w-1/2 h-100 border border-gray-300 shadow">
                 <div className="h-10 flex items-center content-center px-4 font-semibold">
                   <Image
                     src={"/key-icon.svg"}
@@ -205,7 +196,7 @@ export default function App({ params }: Props) {
                   <KeyCompetitors symbol={companySymbol} />
                 </div>
                 <div></div>
-              </div>
+              </div> */}
             </div>
           </>
         )}

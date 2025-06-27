@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
+import type { BulletPoint } from "@/app/ui/public-market/pressRelease";
+
 interface CombinedReportResponse {
   companyOverview: string[];
   pressReleases: string[];
@@ -8,7 +10,7 @@ interface CombinedReportResponse {
 }
 
 interface PressReleaseState {
-  items: string[];
+  items: BulletPoint[];
   loading: boolean;
   error: string | null;
 }
@@ -61,7 +63,12 @@ const pressReleaseSlice = createSlice({
         fetchPressReleases.fulfilled,
         (state, action: PayloadAction<string[]>) => {
           state.loading = false;
-          state.items = action.payload; // Payload is already the pressReleaseSummary array
+          state.items = action.payload.map((text) => ({
+            // Adjust the property name(s) according to the BulletPoint interface
+            text,
+            title: "",
+            sentiment: "",
+          }));
         }
       )
       .addCase(fetchPressReleases.rejected, (state, action) => {
